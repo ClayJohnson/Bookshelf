@@ -1,6 +1,5 @@
 /**
- * Class responsible for creating and upgrading the Book table in the database and encapsulates
- * low-level information such as the column and database names.
+ * 
  */
 package project.bookshelfnew;
 
@@ -10,11 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
+ * Class responsible for creating and upgrading the Book table in the database and encapsulates
+ * low-level information such as the column and database names.
  * @author Clay
  *
  */
 public class MySQLiteHelperBook extends SQLiteOpenHelper {
 
+	// constants for column names and indexes
 	public static final String TABLE_BOOKS = "books";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_TITLE = "title";
@@ -25,6 +27,7 @@ public class MySQLiteHelperBook extends SQLiteOpenHelper {
 	public static final int COLUMN_AUTHOR_INDEX = 2;
 	public static final int COLUMN_BOOKMARK_INDEX = 3;
 	
+	// database name and version that contains the book table
 	private static final String DATABASE_NAME = "bookshelf.db";
 	private static final int DATABASE_VERSION = 1;
 	
@@ -37,7 +40,7 @@ public class MySQLiteHelperBook extends SQLiteOpenHelper {
 			+ " integer);";
 
 	/**
-	 * 
+	 * Constructor
 	 * @param context
 	 */
 	public MySQLiteHelperBook(Context context) {

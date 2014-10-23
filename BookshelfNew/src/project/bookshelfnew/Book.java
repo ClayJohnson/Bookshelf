@@ -1,9 +1,10 @@
 /**
- * Model for a book which contains the data saved in the database and shown in the user interface
+ * 
  */
 package project.bookshelfnew;
 
 /**
+ * Model for a book which contains the data saved in the database and shown in the user interface
  * @author Clay
  *
  */

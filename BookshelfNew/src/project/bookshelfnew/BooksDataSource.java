@@ -71,7 +71,7 @@ public class BooksDataSource {
 	
 	/**
 	 * Deletes a Book from the database
-	 * @param book
+	 * @param book the book to be deleted
 	 */
 	public void deleteBook(Book book) {
 		long id = book.getId();
