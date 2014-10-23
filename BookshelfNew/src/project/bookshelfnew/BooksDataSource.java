@@ -14,7 +14,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * BooksDataSource is the DAO which maintains the database connection and supports adding new
- * books and fetching all books.  This essentially is the BookLibrary from the class diagram.
+ * books and fetching all books.  This essentially is the BookLibrary from the class diagram and handles 
+ * high-level operations on Books in the database.
  * @author Clay
  *
  */
@@ -29,6 +30,7 @@ public class BooksDataSource {
 
 	/**
 	 * Constructor
+	 * @param context
 	 */
 	public BooksDataSource(Context context) {
 		dbHelper = new MySQLiteHelperBook(context);
@@ -64,7 +66,7 @@ public class BooksDataSource {
 		cursor.moveToFirst();
 		Book newBook = cursorToBook(cursor);
 		cursor.close();
-		return newBook;  // NYI
+		return newBook;
 	}
 	
 	/**

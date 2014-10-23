@@ -1,5 +1,6 @@
 /**
- * Class responsible for creating the database.
+ * Class responsible for creating and upgrading the Book table in the database and encapsulates
+ * low-level information such as the column and database names.
  */
 package project.bookshelfnew;
 
