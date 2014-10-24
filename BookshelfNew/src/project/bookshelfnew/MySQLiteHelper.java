@@ -52,14 +52,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME
 			+ " TEXT NOT NULL);";
 
+	private static MySQLiteHelper instance;
+
 	/**
+	 * Return the instance of MySQLiteHelper, creating it if necessary
+	 * 
 	 * @param context
-	 * @param name
-	 * @param factory
-	 * @param version
+	 * @return the instance of MySQLiteHelper
 	 */
-	public MySQLiteHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	public static synchronized MySQLiteHelper getHelper(Context context) {
+		if (instance == null) {
+			instance = new MySQLiteHelper(context);
+		}
+		return instance;
 	}
 
 	/*
@@ -90,6 +95,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOK);
 		onCreate(db);
+	}
+
+	private MySQLiteHelper(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 }
