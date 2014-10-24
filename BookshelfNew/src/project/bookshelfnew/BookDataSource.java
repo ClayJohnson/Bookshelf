@@ -19,7 +19,7 @@ import android.database.sqlite.SQLiteDatabase;
  * @author Clay
  *
  */
-public class BooksDataSource {
+public class BookDataSource {
 	
 	// Database fields
 	private SQLiteDatabase database;
@@ -32,7 +32,7 @@ public class BooksDataSource {
 	 * Constructor
 	 * @param context
 	 */
-	public BooksDataSource(Context context) {
+	public BookDataSource(Context context) {
 		dbHelper = new MySQLiteHelper(context);
 	}
 	
