@@ -13,14 +13,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * BookDataSource is the DAO which maintains the database connection. This
+ * BookDAO is the DAO which maintains the database connection. This
  * essentially is the BookLibrary from the class diagram and handles high-level
  * operations on Books in the database.
  * 
  * @author Clay
  * 
  */
-public class BookDataSource {
+public class BookDAO {
 
 	// Database fields
 	private SQLiteDatabase database;
@@ -35,7 +35,7 @@ public class BookDataSource {
 	 * 
 	 * @param context
 	 */
-	public BookDataSource(Context context) {
+	public BookDAO(Context context) {
 		this.mContext = context;
 		dbHelper = MySQLiteHelper.getHelper(mContext);
 		open();
