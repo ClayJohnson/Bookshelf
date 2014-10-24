@@ -4,20 +4,22 @@
 package project.bookshelfnew;
 
 /**
- * Model for a book which contains the data saved in the database and shown in the user interface
+ * Model for a book which contains the data saved in the database and shown in
+ * the user interface
+ * 
  * @author Clay
- *
+ * 
  */
 public class Book {
 	private long id;
 	private String title;
 	private String author;
 	private long bookmark;
-	
+
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
