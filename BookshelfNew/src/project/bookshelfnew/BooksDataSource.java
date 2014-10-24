@@ -23,17 +23,17 @@ public class BooksDataSource {
 	
 	// Database fields
 	private SQLiteDatabase database;
-	private MySQLiteHelperBook dbHelper;
-	private String[] allColumns = { MySQLiteHelperBook.COLUMN_ID,
-			MySQLiteHelperBook.COLUMN_TITLE, MySQLiteHelperBook.COLUMN_AUTHOR,
-			MySQLiteHelperBook.COLUMN_BOOKMARK};
+	private MySQLiteHelper dbHelper;
+	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
+			MySQLiteHelper.BOOK_TITLE, MySQLiteHelper.BOOK_AUTHOR,
+			MySQLiteHelper.BOOK_BOOKMARK};
 
 	/**
 	 * Constructor
 	 * @param context
 	 */
 	public BooksDataSource(Context context) {
-		dbHelper = new MySQLiteHelperBook(context);
+		dbHelper = new MySQLiteHelper(context);
 	}
 	
 	/**
@@ -58,11 +58,11 @@ public class BooksDataSource {
 	 */
 	public Book createBook(String title, String author) {
 		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelperBook.COLUMN_TITLE, title);
-		values.put(MySQLiteHelperBook.COLUMN_AUTHOR, author);
-		long insertId = database.insert(MySQLiteHelperBook.TABLE_BOOKS, null, values);
-		Cursor cursor = database.query(MySQLiteHelperBook.TABLE_BOOKS, allColumns, 
-				MySQLiteHelperBook.COLUMN_ID + " = " + insertId, null, null, null, null);
+		values.put(MySQLiteHelper.BOOK_TITLE, title);
+		values.put(MySQLiteHelper.BOOK_AUTHOR, author);
+		long insertId = database.insert(MySQLiteHelper.TABLE_BOOK, null, values);
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns, 
+				MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
 		cursor.moveToFirst();
 		Book newBook = cursorToBook(cursor);
 		cursor.close();
@@ -75,7 +75,7 @@ public class BooksDataSource {
 	 */
 	public void deleteBook(Book book) {
 		long id = book.getId();
-		database.delete(MySQLiteHelperBook.TABLE_BOOKS, MySQLiteHelperBook.COLUMN_ID + " = " + id, null);
+		database.delete(MySQLiteHelper.TABLE_BOOK, MySQLiteHelper.COLUMN_ID + " = " + id, null);
 		System.out.println("Book deleted with id: " + id);
 	}
 	
@@ -86,7 +86,7 @@ public class BooksDataSource {
 	public List<Book> getAllBooks() {
 		List<Book> books = new ArrayList<Book>();
 		
-		Cursor cursor = database.query(MySQLiteHelperBook.TABLE_BOOKS, allColumns, null, null, null, null, null);
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns, null, null, null, null, null);
 		
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -106,10 +106,10 @@ public class BooksDataSource {
 	 */
 	private Book cursorToBook(Cursor cursor) {
 		Book book = new Book();
-		book.setId(cursor.getLong(MySQLiteHelperBook.COLUMN_ID_INDEX));
-		book.setTitle(cursor.getString(MySQLiteHelperBook.COLUMN_TITLE_INDEX));
-		book.setAuthor(cursor.getString(MySQLiteHelperBook.COLUMN_AUTHOR_INDEX));
-		book.setBookmark(cursor.getLong(MySQLiteHelperBook.COLUMN_BOOKMARK_INDEX));
+		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
+		book.setTitle(cursor.getString(MySQLiteHelper.COLUMN_TITLE_INDEX));
+		book.setAuthor(cursor.getString(MySQLiteHelper.COLUMN_AUTHOR_INDEX));
+		book.setBookmark(cursor.getLong(MySQLiteHelper.COLUMN_BOOKMARK_INDEX));
 		return book;
 	}
 
