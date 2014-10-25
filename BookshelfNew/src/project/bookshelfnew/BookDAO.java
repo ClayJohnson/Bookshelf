@@ -11,21 +11,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
- * BookDAO is the DAO which maintains the database connection. This
- * essentially is the BookLibrary from the class diagram and handles high-level
- * operations on Books in the database.
+ * BookDAO is a DAO which extends BookshelfDBDAO to implement CRUD operations.
+ * This essentially is the BookLibrary from the class diagram and handles
+ * high-level operations on Books in the database.
  * 
  * @author Clay
  * 
  */
-public class BookDAO {
+public class BookDAO extends BookshelfDBDAO {
+
+	private static final String WHERE_ID_EQUALS = MySQLiteHelper.COLUMN_ID
+			+ " =?";
 
 	// Database fields
-	private SQLiteDatabase database;
-	private MySQLiteHelper dbHelper;
-	private Context mContext;
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
 			MySQLiteHelper.BOOK_TITLE, MySQLiteHelper.BOOK_AUTHOR,
 			MySQLiteHelper.BOOK_BOOKMARK };
@@ -36,67 +37,55 @@ public class BookDAO {
 	 * @param context
 	 */
 	public BookDAO(Context context) {
-		this.mContext = context;
-		dbHelper = MySQLiteHelper.getHelper(mContext);
-		open();
+		super(context);
 	}
 
 	/**
-	 * Opens the database
+	 * Inserts a book into the table.
 	 * 
-	 * @throws SQLException
+	 * @param book
+	 *            the book to be inserted
+	 * @return the ID of the newly inserted book, or -1 if an error occurred
 	 */
-	public void open() throws SQLException {
-		if (dbHelper == null) {
-			dbHelper = MySQLiteHelper.getHelper(mContext);
-		}
-		database = dbHelper.getWritableDatabase();
-	}
-
-	/**
-	 * Closes the database
-	 */
-	public void close() {
-		dbHelper.close();
-	}
-
-	/**
-	 * Creates a Book object, inserts it into the database, and returns the new
-	 * Book object NOTE: This will need to change once we discover how to store
-	 * books
-	 * 
-	 * @return the newly created and inserted Book object
-	 */
-	public Book createBook(String title, String author) {
+	public long save(Book book) {
 		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.BOOK_TITLE, title);
-		values.put(MySQLiteHelper.BOOK_AUTHOR, author);
-		long insertId = database
-				.insert(MySQLiteHelper.TABLE_BOOK, null, values);
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
-				MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null,
-				null);
-		cursor.moveToFirst();
-		Book newBook = cursorToBook(cursor);
-		cursor.close();
-		return newBook;
+		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
+		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());
+
+		return database.insert(MySQLiteHelper.TABLE_BOOK, null, values);
 	}
 
 	/**
-	 * Deletes a Book from the database NYI: WILL NEED TO DELETE MAPPINGS IN
-	 * MAPPING TABLE
+	 * Updates a book in the table.
+	 * 
+	 * @param book
+	 *            the book to be updated
+	 * @return the number of rows updated
+	 */
+	public long update(Book book) {
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
+		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());
+
+		long result = database.update(MySQLiteHelper.TABLE_BOOK, values,
+				WHERE_ID_EQUALS, new String[] { String.valueOf(book.getId()) });
+		Log.d("Update Result:", "=" + result);
+		return result;
+	}
+
+	/**
+	 * Deletes a book from the table.
 	 * 
 	 * @param book
 	 *            the book to be deleted
+	 * @return the number of rows deleted
 	 */
-	public void deleteBook(Book book) {
-		long id = book.getId();
+	public int deleteBook(Book book) {
 
 		// NYI DELETE MAPPINGS IN MAPPING TABLE FOR THIS BOOK
 
-		database.delete(MySQLiteHelper.TABLE_BOOK, MySQLiteHelper.COLUMN_ID
-				+ " = " + id, null);
-		System.out.println("Book deleted with id: " + id);
+		return database.delete(MySQLiteHelper.TABLE_BOOK, WHERE_ID_EQUALS,
+				new String[] { book.getId() + "" });
 	}
 
 	/**
@@ -110,31 +99,18 @@ public class BookDAO {
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
 				null, null, null, null, null);
 
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			Book book = cursorToBook(cursor);
+		while (cursor.moveToNext()) {
+			Book book = new Book();
+			book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
+			book.setTitle(cursor.getString(MySQLiteHelper.COLUMN_TITLE_INDEX));
+			book.setAuthor(cursor.getString(MySQLiteHelper.COLUMN_AUTHOR_INDEX));
+			book.setBookmark(cursor
+					.getLong(MySQLiteHelper.COLUMN_BOOKMARK_INDEX));
 			books.add(book);
-			cursor.moveToNext();
 		}
-
 		cursor.close();
-		return books;
-	}
 
-	/**
-	 * Returns the Book object pointed at by the cursor.
-	 * 
-	 * @param cursor
-	 *            the cursor pointing at the Book table in the database
-	 * @return the Book pointed at by the cursor
-	 */
-	private Book cursorToBook(Cursor cursor) {
-		Book book = new Book();
-		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
-		book.setTitle(cursor.getString(MySQLiteHelper.COLUMN_TITLE_INDEX));
-		book.setAuthor(cursor.getString(MySQLiteHelper.COLUMN_AUTHOR_INDEX));
-		book.setBookmark(cursor.getLong(MySQLiteHelper.COLUMN_BOOKMARK_INDEX));
-		return book;
+		return books;
 	}
 
 }
