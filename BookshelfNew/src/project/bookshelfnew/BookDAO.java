@@ -14,9 +14,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /**
- * BookDAO is a DAO which extends BookshelfDBDAO to implement CRUD operations.
- * This essentially is the BookLibrary from the class diagram and handles
- * high-level operations on Books in the database.
+ * BookDAO is a DAO which extends BookshelfDBDAO to implement CRUD operations
+ * for Books. 
  * 
  * @author Clay
  * 
@@ -104,7 +103,8 @@ public class BookDAO extends BookshelfDBDAO {
 		List<Book> books = new ArrayList<Book>();
 
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
-				WHERE_AUTHOR_EQUALS, new String[] { author + ""}, null, null, null);
+				WHERE_AUTHOR_EQUALS, new String[] { author + "" }, null, null,
+				null);
 
 		// fill the list with Books created from rows in the query
 		while (cursor.moveToNext()) {
@@ -126,7 +126,8 @@ public class BookDAO extends BookshelfDBDAO {
 		List<Book> books = new ArrayList<Book>();
 
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
-				WHERE_TITLE_EQUALS, new String[] { title + ""}, null, null, null);
+				WHERE_TITLE_EQUALS, new String[] { title + "" }, null, null,
+				null);
 
 		// fill the list with Books created from rows in the query
 		while (cursor.moveToNext()) {
@@ -160,7 +161,9 @@ public class BookDAO extends BookshelfDBDAO {
 
 	/**
 	 * Creates a Book object from the current cursor location
-	 * @param cursor a cursor pointing at a row in the Book table
+	 * 
+	 * @param cursor
+	 *            a cursor pointing at a row in the Book table
 	 * @return a Book object filled in with the information from the table row
 	 */
 	private Book cursorToBook(Cursor cursor) {
