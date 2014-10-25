@@ -106,6 +106,7 @@ public class BookDAO extends BookshelfDBDAO {
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
 				WHERE_AUTHOR_EQUALS, new String[] { author + ""}, null, null, null);
 
+		// fill the list with Books created from rows in the query
 		while (cursor.moveToNext()) {
 			Book book = cursorToBook(cursor);
 			books.add(book);
@@ -127,6 +128,7 @@ public class BookDAO extends BookshelfDBDAO {
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
 				WHERE_TITLE_EQUALS, new String[] { title + ""}, null, null, null);
 
+		// fill the list with Books created from rows in the query
 		while (cursor.moveToNext()) {
 			Book book = cursorToBook(cursor);
 			books.add(book);
@@ -146,6 +148,7 @@ public class BookDAO extends BookshelfDBDAO {
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
 				null, null, null, null, null);
 
+		// fill the list with Books created from rows in the query
 		while (cursor.moveToNext()) {
 			Book book = cursorToBook(cursor);
 			books.add(book);
@@ -155,6 +158,11 @@ public class BookDAO extends BookshelfDBDAO {
 		return books;
 	}
 
+	/**
+	 * Creates a Book object from the current cursor location
+	 * @param cursor a cursor pointing at a row in the Book table
+	 * @return a Book object filled in with the information from the table row
+	 */
 	private Book cursorToBook(Cursor cursor) {
 		Book book = new Book();
 		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
