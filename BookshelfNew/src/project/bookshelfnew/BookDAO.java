@@ -23,7 +23,12 @@ import android.util.Log;
  */
 public class BookDAO extends BookshelfDBDAO {
 
+	// where clauses for database queries
 	private static final String WHERE_ID_EQUALS = MySQLiteHelper.COLUMN_ID
+			+ " =?";
+	private static final String WHERE_TITLE_EQUALS = MySQLiteHelper.BOOK_TITLE
+			+ " =?";
+	private static final String WHERE_AUTHOR_EQUALS = MySQLiteHelper.BOOK_AUTHOR
 			+ " =?";
 
 	// Database fields
@@ -82,10 +87,52 @@ public class BookDAO extends BookshelfDBDAO {
 	 */
 	public int deleteBook(Book book) {
 
-		// NYI DELETE MAPPINGS IN MAPPING TABLE FOR THIS BOOK
+		// NYI DELETE MAPPINGS TO CATEGORIES FOR THIS BOOK
 
 		return database.delete(MySQLiteHelper.TABLE_BOOK, WHERE_ID_EQUALS,
 				new String[] { book.getId() + "" });
+	}
+
+	/**
+	 * Get a list of books by the given author
+	 * 
+	 * @param author
+	 *            the author of the books to get
+	 * @return the list of books by the given author
+	 */
+	public List<Book> getBooksByAuthor(String author) {
+		List<Book> books = new ArrayList<Book>();
+
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
+				WHERE_AUTHOR_EQUALS, new String[] { author + ""}, null, null, null);
+
+		while (cursor.moveToNext()) {
+			Book book = cursorToBook(cursor);
+			books.add(book);
+		}
+		cursor.close();
+		return books;
+	}
+
+	/**
+	 * Get a list of books with the given title
+	 * 
+	 * @param title
+	 *            the title of the books to get
+	 * @return the list of books with the given title
+	 */
+	public List<Book> getBooksByTitle(String title) {
+		List<Book> books = new ArrayList<Book>();
+
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_BOOK, allColumns,
+				WHERE_TITLE_EQUALS, new String[] { title + ""}, null, null, null);
+
+		while (cursor.moveToNext()) {
+			Book book = cursorToBook(cursor);
+			books.add(book);
+		}
+		cursor.close();
+		return books;
 	}
 
 	/**
@@ -100,17 +147,21 @@ public class BookDAO extends BookshelfDBDAO {
 				null, null, null, null, null);
 
 		while (cursor.moveToNext()) {
-			Book book = new Book();
-			book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
-			book.setTitle(cursor.getString(MySQLiteHelper.COLUMN_TITLE_INDEX));
-			book.setAuthor(cursor.getString(MySQLiteHelper.COLUMN_AUTHOR_INDEX));
-			book.setBookmark(cursor
-					.getLong(MySQLiteHelper.COLUMN_BOOKMARK_INDEX));
+			Book book = cursorToBook(cursor);
 			books.add(book);
 		}
 		cursor.close();
 
 		return books;
+	}
+
+	private Book cursorToBook(Cursor cursor) {
+		Book book = new Book();
+		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
+		book.setTitle(cursor.getString(MySQLiteHelper.COLUMN_TITLE_INDEX));
+		book.setAuthor(cursor.getString(MySQLiteHelper.COLUMN_AUTHOR_INDEX));
+		book.setBookmark(cursor.getLong(MySQLiteHelper.COLUMN_BOOKMARK_INDEX));
+		return book;
 	}
 
 }
