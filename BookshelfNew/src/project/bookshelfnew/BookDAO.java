@@ -169,9 +169,9 @@ public class BookDAO extends BookshelfDBDAO {
 	private Book cursorToBook(Cursor cursor) {
 		Book book = new Book();
 		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
-		book.setTitle(cursor.getString(MySQLiteHelper.COLUMN_TITLE_INDEX));
-		book.setAuthor(cursor.getString(MySQLiteHelper.COLUMN_AUTHOR_INDEX));
-		book.setBookmark(cursor.getLong(MySQLiteHelper.COLUMN_BOOKMARK_INDEX));
+		book.setTitle(cursor.getString(MySQLiteHelper.BOOK_TITLE_INDEX));
+		book.setAuthor(cursor.getString(MySQLiteHelper.BOOK_AUTHOR_INDEX));
+		book.setBookmark(cursor.getLong(MySQLiteHelper.BOOK_BOOKMARK_INDEX));
 		return book;
 	}
 

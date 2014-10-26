@@ -21,23 +21,28 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "bookshelf.db";
 	private static final int DATABASE_VERSION = 1;
 
-	// constants for table names
+	// table names
 	public static final String TABLE_BOOK = "book";
 	public static final String TABLE_CATEGORY = "category";
+	public static final String TABLE_MAPPING = "mapping";
 
-	// constants for column names
+	// column names
 	public static final String COLUMN_ID = "_id";
 	public static final String BOOK_TITLE = "title";
 	public static final String BOOK_AUTHOR = "author";
 	public static final String BOOK_BOOKMARK = "bookmark";
 	public static final String CATEGORY_NAME = "name";
+	public static final String MAPPING_BOOK_ID = "book_id";
+	public static final String MAPPING_CATEGORY_ID = "category_id";
 
-	// constants for column indexes (do we need this?)
+	// column indexes
 	public static final int COLUMN_ID_INDEX = 0;
-	public static final int COLUMN_TITLE_INDEX = 1;
-	public static final int COLUMN_NAME_INDEX = 1;
-	public static final int COLUMN_AUTHOR_INDEX = 2;
-	public static final int COLUMN_BOOKMARK_INDEX = 3;
+	public static final int BOOK_TITLE_INDEX = 1;
+	public static final int BOOK_AUTHOR_INDEX = 2;
+	public static final int BOOK_BOOKMARK_INDEX = 3;
+	public static final int CATEGORY_NAME_INDEX = 1;
+	public static final int MAPPING_BOOK_ID_INDEX = 1;
+	public static final int MAPPING_CATEGORY_ID_INDEX = 2;
 
 	private static final String CREATE_BOOK_TABLE = "CREATE TABLE "
 			+ TABLE_BOOK + "(" + COLUMN_ID
@@ -49,6 +54,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ TABLE_CATEGORY + "(" + COLUMN_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME
 			+ " TEXT NOT NULL);";
+
+	private static final String CREATE_MAPPING_TABLE = "CREATE TABLE "
+			+ TABLE_MAPPING + "(" + COLUMN_ID
+			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + MAPPING_BOOK_ID + " INTEGER, "
+			+ MAPPING_CATEGORY_ID + " INTEGER);";
 
 	private static MySQLiteHelper instance;
 
@@ -76,6 +86,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_BOOK_TABLE);
 		db.execSQL(CREATE_CATEGORY_TABLE);
+		db.execSQL(CREATE_MAPPING_TABLE);
 	}
 
 	/*
@@ -90,6 +101,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		Log.w(MySQLiteHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will destroy all old data");
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAPPING);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOK);
 		onCreate(db);
