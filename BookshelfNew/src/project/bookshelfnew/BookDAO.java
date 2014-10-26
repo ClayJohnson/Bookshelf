@@ -15,7 +15,7 @@ import android.util.Log;
 
 /**
  * BookDAO is a DAO which extends BookshelfDBDAO to implement CRUD operations
- * for Books. 
+ * for Books.
  * 
  * @author Clay
  * 
@@ -87,6 +87,7 @@ public class BookDAO extends BookshelfDBDAO {
 	public int deleteBook(Book book) {
 
 		// NYI DELETE MAPPINGS TO CATEGORIES FOR THIS BOOK
+		// delete all book.COLUMN_ID occurrences in mapping table
 
 		return database.delete(MySQLiteHelper.TABLE_BOOK, WHERE_ID_EQUALS,
 				new String[] { book.getId() + "" });
@@ -135,6 +136,24 @@ public class BookDAO extends BookshelfDBDAO {
 			books.add(book);
 		}
 		cursor.close();
+		return books;
+	}
+
+	/**
+	 * Get a list of books in the given category
+	 * 
+	 * @param name
+	 *            the name of the category
+	 * @return the list of books in the given category
+	 */
+	public List<Book> getBooksByCategory(Category category) {
+		List<Book> books = new ArrayList<Book>();
+
+		// NYI, query book table for books mapped to given category in mapping
+		// table
+		// category.COLUMN_ID occurrences in mapping table give the
+		// corresponding book.COLUMN_IDs
+
 		return books;
 	}
 

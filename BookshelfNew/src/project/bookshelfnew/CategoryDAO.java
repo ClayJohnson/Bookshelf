@@ -76,9 +76,19 @@ public class CategoryDAO extends BookshelfDBDAO {
 	public int deleteCategory(Category category) {
 
 		// NYI DELETE MAPPINGS TO BOOKS FOR THIS CATEGORY
+		// delete all category.COLUMN_ID occurrences in mapping table
 
 		return database.delete(MySQLiteHelper.TABLE_CATEGORY, WHERE_ID_EQUALS,
 				new String[] { category.getId() + "" });
+	}
+	
+	public List<Category> getCategoriesByBook(Book book) {
+		List<Category> categories = new ArrayList<Category>();
+
+		// NYI, query category table for categories mapped to given book in mapping table
+		// book.COLUMN_ID occurrences in mapping table give the corresponding category.COLUMN_IDs
+
+		return categories;
 	}
 	
 	/**
