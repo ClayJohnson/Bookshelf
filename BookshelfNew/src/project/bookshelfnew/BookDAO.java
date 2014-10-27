@@ -31,7 +31,17 @@ public class BookDAO extends BookshelfDBDAO {
 			+ " =?";
 	private static final String WHERE_BOOK_ID_EQUALS = MySQLiteHelper.MAPPING_BOOK_ID
 			+ " =?";
-
+	
+	// raw query to find all the books a category contains
+	private static final String RAW_BOOKS_MAPPED_TO_CATEGORY = "SELECT "
+			+ MySQLiteHelper.COLUMN_ID + "," + MySQLiteHelper.BOOK_TITLE + ","
+			+ MySQLiteHelper.BOOK_AUTHOR + "," + MySQLiteHelper.BOOK_BOOKMARK
+			+ " FROM " + MySQLiteHelper.TABLE_MAPPING + " m INNER JOIN "
+			+ MySQLiteHelper.TABLE_BOOK + " b ON " + " m."
+			+ MySQLiteHelper.MAPPING_BOOK_ID + "=b."
+			+ MySQLiteHelper.COLUMN_ID + " WHERE m."
+			+ MySQLiteHelper.MAPPING_CATEGORY_ID + "=?";
+	
 	// Database fields
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
 			MySQLiteHelper.BOOK_TITLE, MySQLiteHelper.BOOK_AUTHOR,
@@ -154,10 +164,15 @@ public class BookDAO extends BookshelfDBDAO {
 	public List<Book> getBooksByCategory(Category category) {
 		List<Book> books = new ArrayList<Book>();
 
-		// NYI, query book table for books mapped to given category in mapping
-		// table
-		// category.COLUMN_ID occurrences in mapping table give the
-		// corresponding book.COLUMN_IDs
+		Cursor cursor = database.rawQuery(RAW_BOOKS_MAPPED_TO_CATEGORY,
+				new String[] { category.getId() + "" });
+
+		// fill the list with Categories created from rows in the query
+		while (cursor.moveToNext()) {
+			Book book = cursorToBook(cursor);
+			books.add(book);
+		}
+		cursor.close();
 
 		return books;
 	}
