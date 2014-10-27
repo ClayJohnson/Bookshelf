@@ -29,6 +29,8 @@ public class BookDAO extends BookshelfDBDAO {
 			+ " =?";
 	private static final String WHERE_AUTHOR_EQUALS = MySQLiteHelper.BOOK_AUTHOR
 			+ " =?";
+	private static final String WHERE_BOOK_ID_EQUALS = MySQLiteHelper.MAPPING_BOOK_ID
+			+ " =?";
 
 	// Database fields
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
@@ -78,7 +80,8 @@ public class BookDAO extends BookshelfDBDAO {
 	}
 
 	/**
-	 * Deletes a book from the table.
+	 * Deletes a book from the table and removes its corresponding mappings to
+	 * categories.
 	 * 
 	 * @param book
 	 *            the book to be deleted
@@ -86,9 +89,11 @@ public class BookDAO extends BookshelfDBDAO {
 	 */
 	public int deleteBook(Book book) {
 
-		// NYI DELETE MAPPINGS TO CATEGORIES FOR THIS BOOK
-		// delete all book.COLUMN_ID occurrences in mapping table
+		// delete mappings to categories for this book
+		database.delete(MySQLiteHelper.TABLE_MAPPING, WHERE_BOOK_ID_EQUALS,
+				new String[] { book.getId() + "" });
 
+		// delete book
 		return database.delete(MySQLiteHelper.TABLE_BOOK, WHERE_ID_EQUALS,
 				new String[] { book.getId() + "" });
 	}

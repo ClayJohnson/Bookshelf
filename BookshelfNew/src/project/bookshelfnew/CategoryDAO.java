@@ -23,6 +23,8 @@ public class CategoryDAO extends BookshelfDBDAO {
 	// where clauses for database queries
 	private static final String WHERE_ID_EQUALS = MySQLiteHelper.COLUMN_ID
 			+ " =?";
+	private static final String WHERE_CATEGORY_ID_EQUALS = MySQLiteHelper.MAPPING_CATEGORY_ID
+			+ " =?";
 
 	// Database fields
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
@@ -75,9 +77,11 @@ public class CategoryDAO extends BookshelfDBDAO {
 	 */
 	public int deleteCategory(Category category) {
 
-		// NYI DELETE MAPPINGS TO BOOKS FOR THIS CATEGORY
-		// delete all category.COLUMN_ID occurrences in mapping table
+		// delete mappings to books for this category
+		database.delete(MySQLiteHelper.TABLE_MAPPING, WHERE_CATEGORY_ID_EQUALS,
+				new String[] { category.getId() + "" });
 
+		// delete category
 		return database.delete(MySQLiteHelper.TABLE_CATEGORY, WHERE_ID_EQUALS,
 				new String[] { category.getId() + "" });
 	}
