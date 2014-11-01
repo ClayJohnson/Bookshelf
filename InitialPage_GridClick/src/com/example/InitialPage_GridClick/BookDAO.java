@@ -31,21 +31,21 @@ public class BookDAO extends BookshelfDBDAO {
 			+ " =?";
 	private static final String WHERE_BOOK_ID_EQUALS = MySQLiteHelper.MAPPING_BOOK_ID
 			+ " =?";
-	
+
 	// raw query to find all the books a category contains
 	private static final String RAW_BOOKS_MAPPED_TO_CATEGORY = "SELECT "
-			+ MySQLiteHelper.COLUMN_ID + "," + MySQLiteHelper.BOOK_TITLE + ","
+			+ MySQLiteHelper.COLUMN_ID + "," + MySQLiteHelper.BOOK_FILENAME
+			+ "," + MySQLiteHelper.BOOK_TITLE + ","
 			+ MySQLiteHelper.BOOK_AUTHOR + "," + MySQLiteHelper.BOOK_BOOKMARK
-			+ " FROM " + MySQLiteHelper.TABLE_MAPPING + " m INNER JOIN "
-			+ MySQLiteHelper.TABLE_BOOK + " b ON " + " m."
-			+ MySQLiteHelper.MAPPING_BOOK_ID + "=b."
-			+ MySQLiteHelper.COLUMN_ID + " WHERE m."
-			+ MySQLiteHelper.MAPPING_CATEGORY_ID + "=?";
-	
+			+ " FROM " + MySQLiteHelper.TABLE_MAPPING + " mapping INNER JOIN "
+			+ MySQLiteHelper.TABLE_BOOK + " book ON " + " mapping."
+			+ MySQLiteHelper.MAPPING_BOOK_ID + "=book." + MySQLiteHelper.COLUMN_ID
+			+ " WHERE mapping." + MySQLiteHelper.MAPPING_CATEGORY_ID + "=?";
+
 	// Database fields
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-			MySQLiteHelper.BOOK_TITLE, MySQLiteHelper.BOOK_AUTHOR,
-			MySQLiteHelper.BOOK_BOOKMARK };
+			MySQLiteHelper.BOOK_FILENAME, MySQLiteHelper.BOOK_TITLE,
+			MySQLiteHelper.BOOK_AUTHOR, MySQLiteHelper.BOOK_BOOKMARK };
 
 	/**
 	 * Constructor
@@ -65,6 +65,7 @@ public class BookDAO extends BookshelfDBDAO {
 	 */
 	public long save(Book book) {
 		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
 		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());
 
@@ -80,6 +81,7 @@ public class BookDAO extends BookshelfDBDAO {
 	 */
 	public long update(Book book) {
 		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
 		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());
 
@@ -208,6 +210,7 @@ public class BookDAO extends BookshelfDBDAO {
 	private Book cursorToBook(Cursor cursor) {
 		Book book = new Book();
 		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
+		book.setFileName(cursor.getString(MySQLiteHelper.BOOK_FILENAME_INDEX));
 		book.setTitle(cursor.getString(MySQLiteHelper.BOOK_TITLE_INDEX));
 		book.setAuthor(cursor.getString(MySQLiteHelper.BOOK_AUTHOR_INDEX));
 		book.setBookmark(cursor.getLong(MySQLiteHelper.BOOK_BOOKMARK_INDEX));
