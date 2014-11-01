@@ -24,6 +24,19 @@ public class Book implements Parcelable {
 		super();
 	}
 
+	/**
+	 * Creates a Book object which stores information about a Book in the
+	 * library
+	 * 
+	 * @param id
+	 *            the unique primary key of the book in the database
+	 * @param fileName
+	 *            the file name used to access the book on the phone
+	 * @param title
+	 *            the title of the book used for sorting and display purposes
+	 * @param author
+	 *            the author of the book used for sorting and display purposes
+	 */
 	public Book(long id, String fileName, String title, String author) {
 		super();
 		this.id = id;
@@ -33,6 +46,17 @@ public class Book implements Parcelable {
 		this.bookmark = -1;
 	}
 
+	/**
+	 * Create a Book object which stores information about a Book in the
+	 * library. The id is automatically assigned by the database.
+	 * 
+	 * @param fileName
+	 *            the file name used to access the book on the phone
+	 * @param title
+	 *            the title of the book used for sorting and display purposes
+	 * @param author
+	 *            the author of the book used for sorting and display purposes
+	 */
 	public Book(String fileName, String title, String author) {
 		this.fileName = fileName;
 		this.title = title;
@@ -56,11 +80,11 @@ public class Book implements Parcelable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getFileName() {
 		return fileName;
 	}
-	
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
@@ -119,7 +143,9 @@ public class Book implements Parcelable {
 		}
 	};
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -135,7 +161,9 @@ public class Book implements Parcelable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
