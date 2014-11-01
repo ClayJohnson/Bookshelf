@@ -71,6 +71,7 @@ public class BookDAO extends BookshelfDBDAO {
 
 		return database.insert(MySQLiteHelper.TABLE_BOOK, null, values);
 	}
+	
 
 	/**
 	 * Updates a book in the table.
@@ -108,6 +109,20 @@ public class BookDAO extends BookshelfDBDAO {
 		// delete book
 		return database.delete(MySQLiteHelper.TABLE_BOOK, WHERE_ID_EQUALS,
 				new String[] { book.getId() + "" });
+	}
+	
+	/**
+	 * Add a Book to a Category by adding an entry into the mapping table.
+	 * @param book the book to be mapped to a category
+	 * @param category the category to be mapped to a book
+	 * @return the ID of the new mapping entry, or -1 if an error occurred
+	 */
+	public long addBookToCategory(Book book, Category category) {
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.MAPPING_BOOK_ID, book.getId());
+		values.put(MySQLiteHelper.MAPPING_CATEGORY_ID, category.getId());
+		
+		return database.insert(MySQLiteHelper.TABLE_MAPPING, null, values);
 	}
 
 	/**
