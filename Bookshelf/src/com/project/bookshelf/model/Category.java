@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project.bookshelf;
+package com.project.bookshelf.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,10 +1,13 @@
 /**
  * 
  */
-package project.bookshelf;
+package com.project.bookshelf.database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.bookshelf.model.Book;
+import com.project.bookshelf.model.Category;
 
 import android.content.ContentValues;
 import android.content.Context;
