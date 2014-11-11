@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project.bookshelfnew;
+package project.bookshelf;
 
 import android.content.Context;
 import android.database.SQLException;
