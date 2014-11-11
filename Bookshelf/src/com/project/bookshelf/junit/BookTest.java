@@ -3,40 +3,41 @@
  */
 package com.project.bookshelf.junit;
 
-import com.project.bookshelf.model.Book;
+import static org.junit.Assert.*;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.project.bookshelf.model.Book;
 
 /**
  * @author Clay
  *
  */
-public class BookTest extends TestCase {
+public class BookTest {
+
+	public BookTest() {
+	}
 
 	/**
-	 * @param name
+	 * @throws java.lang.Exception
 	 */
-	public BookTest(String name) {
-		super(name);
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#setUp()
+	/**
+	 * @throws java.lang.Exception
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.model.Book#Book()}.
 	 */
+	@Test
 	public void testBook() {
 		fail("Not yet implemented");
 	}
@@ -44,6 +45,7 @@ public class BookTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.model.Book#Book(long, java.lang.String, java.lang.String, java.lang.String)}.
 	 */
+	@Test
 	public void testBookLongStringStringString() {
 		fail("Not yet implemented");
 	}
@@ -51,77 +53,8 @@ public class BookTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.model.Book#Book(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
+	@Test
 	public void testBookStringStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#getId()}.
-	 */
-	public void testGetId() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#setId(long)}.
-	 */
-	public void testSetId() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#getFileName()}.
-	 */
-	public void testGetFileName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#setFileName(java.lang.String)}.
-	 */
-	public void testSetFileName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#getTitle()}.
-	 */
-	public void testGetTitle() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#setTitle(java.lang.String)}.
-	 */
-	public void testSetTitle() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#getAuthor()}.
-	 */
-	public void testGetAuthor() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#setAuthor(java.lang.String)}.
-	 */
-	public void testSetAuthor() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#getBookmark()}.
-	 */
-	public void testGetBookmark() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#setBookmark(long)}.
-	 */
-	public void testSetBookmark() {
 		fail("Not yet implemented");
 	}
 

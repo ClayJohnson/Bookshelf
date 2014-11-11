@@ -3,43 +3,39 @@
  */
 package com.project.bookshelf.junit;
 
-import com.project.bookshelf.database.BookshelfDBDAO;
-import com.project.bookshelf.database.CategoryDAO;
-import com.project.bookshelf.model.Book;
-import com.project.bookshelf.model.Category;
+import static org.junit.Assert.*;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Clay
  *
  */
-public class CategoryDAOTest extends TestCase {
+public class CategoryDAOTest {
+
+	public CategoryDAOTest() {
+	}
 
 	/**
-	 * @param name
+	 * @throws java.lang.Exception
 	 */
-	public CategoryDAOTest(String name) {
-		super(name);
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#setUp()
+	/**
+	 * @throws java.lang.Exception
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#CategoryDAO(android.content.Context)}.
 	 */
+	@Test
 	public void testCategoryDAO() {
 		fail("Not yet implemented");
 	}
@@ -47,6 +43,7 @@ public class CategoryDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#save(com.project.bookshelf.model.Category)}.
 	 */
+	@Test
 	public void testSave() {
 		fail("Not yet implemented");
 	}
@@ -54,6 +51,7 @@ public class CategoryDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#update(com.project.bookshelf.model.Category)}.
 	 */
+	@Test
 	public void testUpdate() {
 		fail("Not yet implemented");
 	}
@@ -61,6 +59,7 @@ public class CategoryDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#deleteCategory(com.project.bookshelf.model.Category)}.
 	 */
+	@Test
 	public void testDeleteCategory() {
 		fail("Not yet implemented");
 	}
@@ -68,6 +67,7 @@ public class CategoryDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#addCategoryForBook(com.project.bookshelf.model.Category, com.project.bookshelf.model.Book)}.
 	 */
+	@Test
 	public void testAddCategoryForBook() {
 		fail("Not yet implemented");
 	}
@@ -75,6 +75,7 @@ public class CategoryDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#getCategoriesByBook(com.project.bookshelf.model.Book)}.
 	 */
+	@Test
 	public void testGetCategoriesByBook() {
 		fail("Not yet implemented");
 	}
@@ -82,21 +83,8 @@ public class CategoryDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#getAllCategories()}.
 	 */
+	@Test
 	public void testGetAllCategories() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.database.BookshelfDBDAO#open()}.
-	 */
-	public void testOpen() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.database.BookshelfDBDAO#close()}.
-	 */
-	public void testClose() {
 		fail("Not yet implemented");
 	}
 

@@ -1,62 +1,66 @@
 package com.project.bookshelf.junit;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
-public class BookDAOTest extends TestCase {
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-	public BookDAOTest(String name) {
-		super(name);
+public class BookDAOTest {
+
+	public BookDAOTest() {
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
+	@Test
 	public void testBookDAO() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testSave() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testUpdate() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testDeleteBook() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testAddBookToCategory() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testGetBooksByAuthor() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testGetBooksByTitle() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testGetBooksByCategory() {
 		fail("Not yet implemented");
 	}
 
+	@Test
 	public void testGetAllBooks() {
-		fail("Not yet implemented");
-	}
-
-	public void testOpen() {
-		fail("Not yet implemented");
-	}
-
-	public void testClose() {
 		fail("Not yet implemented");
 	}
 

@@ -3,40 +3,39 @@
  */
 package com.project.bookshelf.junit;
 
-import com.project.bookshelf.database.BookshelfDBDAO;
+import static org.junit.Assert.*;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Clay
  *
  */
-public class BookshelfDBDAOTest extends TestCase {
+public class BookshelfDBDAOTest {
+
+	public BookshelfDBDAOTest() {
+	}
 
 	/**
-	 * @param name
+	 * @throws java.lang.Exception
 	 */
-	public BookshelfDBDAOTest(String name) {
-		super(name);
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#setUp()
+	/**
+	 * @throws java.lang.Exception
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.BookshelfDBDAO#BookshelfDBDAO(android.content.Context)}.
 	 */
+	@Test
 	public void testBookshelfDBDAO() {
 		fail("Not yet implemented");
 	}
@@ -44,6 +43,7 @@ public class BookshelfDBDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.BookshelfDBDAO#open()}.
 	 */
+	@Test
 	public void testOpen() {
 		fail("Not yet implemented");
 	}
@@ -51,6 +51,7 @@ public class BookshelfDBDAOTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.BookshelfDBDAO#close()}.
 	 */
+	@Test
 	public void testClose() {
 		fail("Not yet implemented");
 	}

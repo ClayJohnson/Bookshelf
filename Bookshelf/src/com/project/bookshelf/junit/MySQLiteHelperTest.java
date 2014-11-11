@@ -3,40 +3,39 @@
  */
 package com.project.bookshelf.junit;
 
-import com.project.bookshelf.database.MySQLiteHelper;
+import static org.junit.Assert.*;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Clay
  *
  */
-public class MySQLiteHelperTest extends TestCase {
+public class MySQLiteHelperTest {
+
+	public MySQLiteHelperTest() {
+	}
 
 	/**
-	 * @param name
+	 * @throws java.lang.Exception
 	 */
-	public MySQLiteHelperTest(String name) {
-		super(name);
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#setUp()
+	/**
+	 * @throws java.lang.Exception
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.MySQLiteHelper#getHelper(android.content.Context)}.
 	 */
+	@Test
 	public void testGetHelper() {
 		fail("Not yet implemented");
 	}
@@ -44,6 +43,7 @@ public class MySQLiteHelperTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.MySQLiteHelper#onCreate(android.database.sqlite.SQLiteDatabase)}.
 	 */
+	@Test
 	public void testOnCreateSQLiteDatabase() {
 		fail("Not yet implemented");
 	}
@@ -51,6 +51,7 @@ public class MySQLiteHelperTest extends TestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.MySQLiteHelper#onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)}.
 	 */
+	@Test
 	public void testOnUpgradeSQLiteDatabaseIntInt() {
 		fail("Not yet implemented");
 	}
