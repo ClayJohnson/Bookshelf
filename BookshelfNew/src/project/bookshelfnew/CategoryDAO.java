@@ -97,6 +97,20 @@ public class CategoryDAO extends BookshelfDBDAO {
 	}
 
 	/**
+	 * Add a Category for a Book by adding an entry into the mapping table.
+	 * @param category the category to be mapped to a book
+	 * @param book the book to be mapped to a category
+	 * @return the ID of the new mapping entry, or -1 if an error occurred
+	 */
+	public long addCategoryForBook(Category category, Book book) {
+		ContentValues values = new ContentValues();	
+		values.put(MySQLiteHelper.MAPPING_CATEGORY_ID, category.getId());
+		values.put(MySQLiteHelper.MAPPING_BOOK_ID, book.getId());
+		
+		return database.insert(MySQLiteHelper.TABLE_MAPPING, null, values);
+	}
+	
+	/**
 	 * Fetches all Categories a Book belongs to
 	 * 
 	 * @param book

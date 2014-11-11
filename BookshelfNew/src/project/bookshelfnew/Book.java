@@ -15,6 +15,7 @@ import android.os.Parcelable;
  */
 public class Book implements Parcelable {
 	private long id;
+	private String fileName;
 	private String title;
 	private String author;
 	private long bookmark;
@@ -23,15 +24,41 @@ public class Book implements Parcelable {
 		super();
 	}
 
-	public Book(long id, String title, String author) {
+	/**
+	 * Creates a Book object which stores information about a Book in the
+	 * library
+	 * 
+	 * @param id
+	 *            the unique primary key of the book in the database
+	 * @param fileName
+	 *            the file name used to access the book on the phone
+	 * @param title
+	 *            the title of the book used for sorting and display purposes
+	 * @param author
+	 *            the author of the book used for sorting and display purposes
+	 */
+	public Book(long id, String fileName, String title, String author) {
 		super();
 		this.id = id;
+		this.fileName = fileName;
 		this.title = title;
 		this.author = author;
 		this.bookmark = -1;
 	}
 
-	public Book(String title, String author) {
+	/**
+	 * Create a Book object which stores information about a Book in the
+	 * library. The id is automatically assigned by the database.
+	 * 
+	 * @param fileName
+	 *            the file name used to access the book on the phone
+	 * @param title
+	 *            the title of the book used for sorting and display purposes
+	 * @param author
+	 *            the author of the book used for sorting and display purposes
+	 */
+	public Book(String fileName, String title, String author) {
+		this.fileName = fileName;
 		this.title = title;
 		this.author = author;
 		this.bookmark = -1;
@@ -40,6 +67,7 @@ public class Book implements Parcelable {
 	private Book(Parcel in) {
 		super();
 		this.id = in.readLong();
+		this.fileName = in.readString();
 		this.title = in.readString();
 		this.author = in.readString();
 		this.bookmark = in.readLong();
@@ -51,6 +79,14 @@ public class Book implements Parcelable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public String getTitle() {
@@ -79,8 +115,8 @@ public class Book implements Parcelable {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author
-				+ ", bookmark=" + bookmark + "]";
+		return "Book [id=" + id + ", fileName=" + fileName + ", title=" + title
+				+ ", author=" + author + ", bookmark=" + bookmark + "]";
 	}
 
 	@Override
@@ -91,6 +127,7 @@ public class Book implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeLong(getId());
+		dest.writeString(getFileName());
 		dest.writeString(getTitle());
 		dest.writeString(getAuthor());
 		dest.writeLong(getBookmark());
@@ -106,17 +143,29 @@ public class Book implements Parcelable {
 		}
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + (int) (bookmark ^ (bookmark >>> 32));
+		result = prime * result
+				+ ((fileName == null) ? 0 : fileName.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -132,6 +181,11 @@ public class Book implements Parcelable {
 		} else if (!author.equals(other.author))
 			return false;
 		if (bookmark != other.bookmark)
+			return false;
+		if (fileName == null) {
+			if (other.fileName != null)
+				return false;
+		} else if (!fileName.equals(other.fileName))
 			return false;
 		if (id != other.id)
 			return false;

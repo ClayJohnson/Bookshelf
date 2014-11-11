@@ -28,6 +28,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	// column names
 	public static final String COLUMN_ID = "_id";
+	public static final String BOOK_FILENAME = "filename";
 	public static final String BOOK_TITLE = "title";
 	public static final String BOOK_AUTHOR = "author";
 	public static final String BOOK_BOOKMARK = "bookmark";
@@ -37,18 +38,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	// column indexes
 	public static final int COLUMN_ID_INDEX = 0;
-	public static final int BOOK_TITLE_INDEX = 1;
-	public static final int BOOK_AUTHOR_INDEX = 2;
-	public static final int BOOK_BOOKMARK_INDEX = 3;
+	public static final int BOOK_FILENAME_INDEX = 1;
+	public static final int BOOK_TITLE_INDEX = 2;
+	public static final int BOOK_AUTHOR_INDEX = 3;
+	public static final int BOOK_BOOKMARK_INDEX = 4;
 	public static final int CATEGORY_NAME_INDEX = 1;
 	public static final int MAPPING_BOOK_ID_INDEX = 1;
 	public static final int MAPPING_CATEGORY_ID_INDEX = 2;
 
 	private static final String CREATE_BOOK_TABLE = "CREATE TABLE "
 			+ TABLE_BOOK + "(" + COLUMN_ID
-			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + BOOK_TITLE
-			+ " TEXT NOT NULL, " + BOOK_AUTHOR + " TEXT NOT NULL, "
-			+ BOOK_BOOKMARK + " INTEGER);";
+			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + BOOK_FILENAME
+			+ " TEXT NOT NULL, " + BOOK_TITLE + " TEXT NOT NULL, "
+			+ BOOK_AUTHOR + " TEXT NOT NULL, " + BOOK_BOOKMARK + " INTEGER);";
 
 	private static final String CREATE_CATEGORY_TABLE = "CREATE TABLE "
 			+ TABLE_CATEGORY + "(" + COLUMN_ID
@@ -57,8 +59,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	private static final String CREATE_MAPPING_TABLE = "CREATE TABLE "
 			+ TABLE_MAPPING + "(" + COLUMN_ID
-			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + MAPPING_BOOK_ID + " INTEGER, "
-			+ MAPPING_CATEGORY_ID + " INTEGER);";
+			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + MAPPING_BOOK_ID
+			+ " INTEGER, " + MAPPING_CATEGORY_ID + " INTEGER);";
 
 	private static MySQLiteHelper instance;
 
