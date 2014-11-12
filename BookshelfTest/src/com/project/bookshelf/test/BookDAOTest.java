@@ -3,16 +3,12 @@
  */
 package com.project.bookshelf.test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.project.bookshelf.database.BookDAO;
-import com.project.bookshelf.database.MySQLiteHelper;
 import com.project.bookshelf.model.Book;
 import com.project.bookshelf.model.Category;
 
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
@@ -56,15 +52,6 @@ public class BookDAOTest extends AndroidTestCase {
 
 	public void testPreConditions() {
 		assertNotNull(bookDAO);
-	}
-
-	/**
-	 * Test method for
-	 * {@link com.project.bookshelf.database.BookDAO#BookDAO(android.content.Context)}
-	 * .
-	 */
-	public void testBookDAO() {
-		fail("Not yet implemented");
 	}
 
 	/**
