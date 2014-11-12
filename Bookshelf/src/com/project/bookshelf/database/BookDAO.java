@@ -17,8 +17,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /**
- * BookDAO is a DAO which extends BookshelfDBDAO to implement CRUD operations
- * for Books.
+ * BookDAO is a data access object which handles connection to the database and
+ * access and modification of data relating to books.  Database objects are
+ * converted to/from Book objects so that calling code does not need to know
+ * the database structure.
+ * 
+ * To use BookDAO in an activity, create it as an object and pass it the 
+ * activity's context.  First, call the open method to get a handle to the database,
+ * then call any of the other methods you wish to interact with the database.  Call
+ * the close method when you are done to destroy the database handle.
+ * 
+ * Example usage to retrieve a list of all Books contained in the database:
+ * datasource = new BookDAO(this);
+ * datasource.open();
+ * List<Book> books = datasource.getAllBooks();
+ * datasource.close();
  * 
  * @author Clay
  * 
