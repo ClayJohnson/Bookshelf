@@ -69,7 +69,7 @@ public class CategoryDAO extends BookshelfDBDAO {
 	 *            the category to be inserted
 	 * @return the ID of the newly inserted category, or -1 if an error occurred
 	 */
-	public long save(Category category) {
+	public long insertCategory(Category category) {
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.CATEGORY_NAME, category.getName());
 
@@ -83,7 +83,7 @@ public class CategoryDAO extends BookshelfDBDAO {
 	 *            the category to be updated
 	 * @return the number of rows updated
 	 */
-	public long update(Category category) {
+	public long updateCategory(Category category) {
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.CATEGORY_NAME, category.getName());
 

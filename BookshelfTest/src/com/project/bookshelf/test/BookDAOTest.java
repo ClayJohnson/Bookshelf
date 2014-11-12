@@ -42,14 +42,14 @@ public class BookDAOTest extends AndroidTestCase {
 	}
 
 	/**
-	 * Test method for {@link com.project.bookshelf.database.BookDAO#save(com.project.bookshelf.model.Book)}.
+	 * Test method for {@link com.project.bookshelf.database.BookDAO#insertBook(com.project.bookshelf.model.Book)}.
 	 */
 	public void testSave() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link com.project.bookshelf.database.BookDAO#update(com.project.bookshelf.model.Book)}.
+	 * Test method for {@link com.project.bookshelf.database.BookDAO#updateBook(com.project.bookshelf.model.Book)}.
 	 */
 	public void testUpdate() {
 		fail("Not yet implemented");

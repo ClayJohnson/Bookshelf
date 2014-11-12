@@ -42,14 +42,14 @@ public class CategoryDAOTest extends AndroidTestCase {
 	}
 
 	/**
-	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#save(com.project.bookshelf.model.Category)}.
+	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#insertCategory(com.project.bookshelf.model.Category)}.
 	 */
 	public void testSave() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#update(com.project.bookshelf.model.Category)}.
+	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#updateCategory(com.project.bookshelf.model.Category)}.
 	 */
 	public void testUpdate() {
 		fail("Not yet implemented");

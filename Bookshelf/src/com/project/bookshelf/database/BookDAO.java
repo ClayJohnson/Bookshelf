@@ -79,7 +79,7 @@ public class BookDAO extends BookshelfDBDAO {
 	 *            the book to be inserted
 	 * @return the ID of the newly inserted book, or -1 if an error occurred
 	 */
-	public long save(Book book) {
+	public long insertBook(Book book) {
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
@@ -96,7 +96,7 @@ public class BookDAO extends BookshelfDBDAO {
 	 *            the book to be updated
 	 * @return the number of rows updated
 	 */
-	public long update(Book book) {
+	public long updateBook(Book book) {
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
