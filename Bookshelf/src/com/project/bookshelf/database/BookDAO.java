@@ -49,10 +49,10 @@ public class BookDAO extends BookshelfDBDAO {
 			+ " =?";
 
 	// raw query to find all the books a category contains
-	private static final String RAW_BOOKS_MAPPED_TO_CATEGORY = "SELECT "
-			+ MySQLiteHelper.COLUMN_ID + "," + MySQLiteHelper.BOOK_FILENAME
-			+ "," + MySQLiteHelper.BOOK_TITLE + ","
-			+ MySQLiteHelper.BOOK_AUTHOR + "," + MySQLiteHelper.BOOK_BOOKMARK
+	private static final String RAW_BOOKS_MAPPED_TO_CATEGORY = "SELECT book."
+			+ MySQLiteHelper.COLUMN_ID + ", book." + MySQLiteHelper.BOOK_FILENAME
+			+ ", book." + MySQLiteHelper.BOOK_TITLE + ", book."
+			+ MySQLiteHelper.BOOK_AUTHOR + ", book." + MySQLiteHelper.BOOK_BOOKMARK
 			+ " FROM " + MySQLiteHelper.TABLE_MAPPING + " mapping INNER JOIN "
 			+ MySQLiteHelper.TABLE_BOOK + " book ON " + " mapping."
 			+ MySQLiteHelper.MAPPING_BOOK_ID + "=book." + MySQLiteHelper.COLUMN_ID
