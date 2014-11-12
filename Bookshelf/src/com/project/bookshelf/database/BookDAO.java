@@ -116,7 +116,7 @@ public class BookDAO extends BookshelfDBDAO {
 	 *            the book to be deleted
 	 * @return the number of rows deleted
 	 */
-	public int deleteBook(Book book) {
+	public long deleteBook(Book book) {
 
 		// delete mappings to categories for this book
 		database.delete(MySQLiteHelper.TABLE_MAPPING, WHERE_BOOK_ID_EQUALS,
