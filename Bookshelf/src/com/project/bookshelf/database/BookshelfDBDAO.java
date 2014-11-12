@@ -9,7 +9,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * BookshelfDBDAO is the DAO which maintains the database connection.
+ * BookshelfDBDAO contains methods which maintain the database connection.  It is extended by 
+ * the other DAOs and is not called directly.
  * @author Clay
  *
  */
