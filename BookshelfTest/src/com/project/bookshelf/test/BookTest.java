@@ -54,6 +54,11 @@ public class BookTest extends TestCase {
 		
 		Book book = new Book(id,fileName,title,author);
 		assertNotNull("a Book should be able to be constructed with an id");
+		assertTrue("A book constructed with id should set it properly",book.getId() == id);
+		assertEquals("A book constructed with fileName should set it properly", book.getFileName(), fileName);
+		assertEquals("A book constructed with title should set it properly", book.getTitle(), title);
+		assertEquals("A book constructed with author should set it properly", book.getAuthor(),author);
+		assertTrue("A book should be constructed with the default bookmark value of -1", book.getBookmark() == -1);
 	}
 
 	/**
@@ -66,6 +71,10 @@ public class BookTest extends TestCase {
 		
 		Book book = new Book(fileName,title,author);
 		assertNotNull("a Book should be able to be constructed without an id");
+		assertEquals("A book constructed with fileName should set it properly", book.getFileName(), fileName);
+		assertEquals("A book constructed with title should set it properly", book.getTitle(), title);
+		assertEquals("A book constructed with author should set it properly", book.getAuthor(),author);
+		assertTrue("A book should be constructed with the default bookmark value of -1", book.getBookmark() == -1);
 	}
 
 }
