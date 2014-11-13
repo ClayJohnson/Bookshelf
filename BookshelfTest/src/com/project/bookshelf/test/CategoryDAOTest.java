@@ -67,7 +67,7 @@ public class CategoryDAOTest extends AndroidTestCase {
 		assertNotNull(categoryDAO);
 	}
 	
-	public void testInsertUpdateDeleteCategory() {
+	public void testInsertUpdateDeleteCategoryWithoutId() {
 		Category goodCategory = new Category("name");
 		
 		// try to insert a good category
@@ -118,13 +118,70 @@ public class CategoryDAOTest extends AndroidTestCase {
 		assertTrue("The database should contain no categories after deleting the only category", 
 				categories.size() == 0);
 	}
+	
+	public void testInsertUpdateDeleteCategoryWithId() {
+		long id = 5;
+		Category goodCategory = new Category(id, "name");
+		
+		// try to insert a good category
+		long insertedCategoryId = -1;
+		try {
+			insertedCategoryId = categoryDAO.insertCategory(goodCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		assertFalse("insertCategory should not return -1 after inserting a good category", 
+				insertedCategoryId == -1);	
+		assertTrue("insertCategory should return the correct id, returned id: " 
+				+ insertedCategoryId + ", original id: " + id,insertedCategoryId == id);
+		List<Category> categories = categoryDAO.getAllCategories();
+		assertTrue("The database should contain one category after the first insert", categories.size() == 1);
+		assertEquals("The name of the category in the database should match the inserted category", 
+				categories.get(0).getName(), goodCategory.getName());
+		assertEquals("The id of the category in the database should match the inserted category",
+				categories.get(0).getId(), goodCategory.getId());
+		
+		// try to update the category
+		goodCategory = categories.get(0);
+		goodCategory.setName("newName");
+		long updatedRows = 0;
+		try {
+			updatedRows = categoryDAO.updateCategory(goodCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		assertTrue("updateCategory should return 1 after updating 1 row", 
+				updatedRows == 1);
+		categories = categoryDAO.getAllCategories();
+		assertTrue("The database should contain one category after the first update", 
+				categories.size() == 1);
+		assertEquals("The name of the category in the database should match the updated category", 
+				categories.get(0).getName(), goodCategory.getName());
+		
+		// try to delete the category
+		goodCategory = categories.get(0);
+		long deletedRows = 0;
+		try {
+			deletedRows = categoryDAO.deleteCategory(goodCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		assertTrue("deleteCategory should return 1 after deleting 1 row",
+				deletedRows == 1);
+		categories = categoryDAO.getAllCategories();
+		assertTrue("The database should contain no categories after deleting the only category", 
+				categories.size() == 0);
+	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#addCategoryForBook(com.project.bookshelf.model.Category, com.project.bookshelf.model.Book)}.
 	 */
-	public void testAddCategoryForBookGetCategoriesByBook() {
-		Book goodBook = new Book("fileName", "title", "author");
-		Category goodCategory = new Category("name");
+	public void testAddCategoryForBookGetCategoriesByBookWithId() {
+		Book goodBook = new Book(1, "fileName", "title", "author");
+		Category goodCategory = new Category(2, "name");
 
 		// add book and category to database
 		try {
@@ -146,6 +203,7 @@ public class CategoryDAOTest extends AndroidTestCase {
 		assertFalse("addCategoryForBook should return the id of the mapping if successful", 
 				id == -1);
 		
+		// get the category back for the book
 		List<Category> categories = null;
 		try {
 			categories = categoryDAO.getCategoriesByBook(goodBook);
