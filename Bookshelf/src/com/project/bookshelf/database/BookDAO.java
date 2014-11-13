@@ -239,12 +239,16 @@ public class BookDAO extends BookshelfDBDAO {
 	 * @return a Book object filled in with the information from the table row
 	 */
 	private Book cursorToBook(Cursor cursor) {
-		Book book = new Book();
-		book.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
-		book.setFileName(cursor.getString(MySQLiteHelper.BOOK_FILENAME_INDEX));
-		book.setTitle(cursor.getString(MySQLiteHelper.BOOK_TITLE_INDEX));
-		book.setAuthor(cursor.getString(MySQLiteHelper.BOOK_AUTHOR_INDEX));
-		book.setBookmark(cursor.getLong(MySQLiteHelper.BOOK_BOOKMARK_INDEX));
+		
+		long id = cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX);
+		String fileName = cursor.getString(MySQLiteHelper.BOOK_FILENAME_INDEX);
+		String title = cursor.getString(MySQLiteHelper.BOOK_TITLE_INDEX);
+		String author = cursor.getString(MySQLiteHelper.BOOK_AUTHOR_INDEX);
+		long bookmark = cursor.getLong(MySQLiteHelper.BOOK_BOOKMARK_INDEX);
+		
+		Book book = new Book(id, fileName, title, author);
+		book.setBookmark(bookmark);
+		
 		return book;
 	}
 

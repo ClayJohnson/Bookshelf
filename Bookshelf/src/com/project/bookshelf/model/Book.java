@@ -20,9 +20,6 @@ public class Book implements Parcelable {
 	private String author;
 	private long bookmark;
 
-	public Book() {
-		super();
-	}
 
 	/**
 	 * Creates a Book object which stores information about a Book in the
@@ -75,10 +72,6 @@ public class Book implements Parcelable {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getFileName() {

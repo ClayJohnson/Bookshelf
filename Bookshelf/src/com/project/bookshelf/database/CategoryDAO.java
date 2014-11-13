@@ -179,9 +179,9 @@ public class CategoryDAO extends BookshelfDBDAO {
 	 *         row
 	 */
 	private Category cursorToCategory(Cursor cursor) {
-		Category category = new Category();
-		category.setId(cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX));
-		category.setName(cursor.getString(MySQLiteHelper.CATEGORY_NAME_INDEX));
+		long id = cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX);
+		String name = cursor.getString(MySQLiteHelper.CATEGORY_NAME_INDEX);
+		Category category = new Category(id, name);
 		return category;
 	}
 

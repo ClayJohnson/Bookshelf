@@ -16,10 +16,7 @@ import android.os.Parcelable;
 public class Category implements Parcelable {
 	private long id;
 	private String name;
-
-	public Category() {
-		super();
-	}
+	
 	
 	public Category(long id, String name) {
 		super();
@@ -40,10 +37,6 @@ public class Category implements Parcelable {
 	
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getName() {
