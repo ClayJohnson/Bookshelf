@@ -84,6 +84,7 @@ public class BookDAO extends BookshelfDBDAO {
 		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
 		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());
+		values.put(MySQLiteHelper.BOOK_BOOKMARK, book.getBookmark());
 
 		return database.insert(MySQLiteHelper.TABLE_BOOK, null, values);
 	}
@@ -101,6 +102,7 @@ public class BookDAO extends BookshelfDBDAO {
 		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
 		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());
+		values.put(MySQLiteHelper.BOOK_BOOKMARK, book.getBookmark());
 
 		long result = database.update(MySQLiteHelper.TABLE_BOOK, values,
 				WHERE_ID_EQUALS, new String[] { String.valueOf(book.getId()) });
