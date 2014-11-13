@@ -35,15 +35,6 @@ public class BookTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link com.project.bookshelf.model.Book#Book()}.
-	 */
-	public void testBookShouldContructWhenEmpty() {
-		Book book = new Book();
-		
-		assertNotNull("an empty Book should be able to be constructed", book);
-	}
-
-	/**
 	 * Test method for {@link com.project.bookshelf.model.Book#Book(long, java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	public void testBookShouldConstructWithId() {

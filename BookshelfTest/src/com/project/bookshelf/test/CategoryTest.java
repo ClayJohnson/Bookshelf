@@ -35,15 +35,6 @@ public class CategoryTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link com.project.bookshelf.model.Category#Category()}.
-	 */
-	public void testCategoryShouldConstructWhenEmpty() {
-		Category category = new Category();
-		
-		assertNotNull("an empty Category should be able to be constructed", category);
-	}
-
-	/**
 	 * Test method for {@link com.project.bookshelf.model.Category#Category(long, java.lang.String)}.
 	 */
 	public void testCategoryShouldConstructWithId() {

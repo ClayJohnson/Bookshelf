@@ -3,6 +3,7 @@
  */
 package com.project.bookshelf.test;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.project.bookshelf.database.BookDAO;
@@ -43,41 +44,41 @@ public class CategoryDAOTest extends AndroidTestCase {
 	 * @see android.test.AndroidTestCase#tearDown()
 	 */
 	protected void tearDown() throws Exception {
+		// wipe the database clean
+//		List<Category> categories = categoryDAO.getAllCategories();
+//		for (Category category : categories) {
+//			categoryDAO.deleteCategory(category);
+//		}		
 		categoryDAO.close();
+		categoryDAO = null;
 		super.tearDown();
 	}
 
 	public void testPreconditions() {
 		assertNotNull(categoryDAO);
 	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#insertCategory(com.project.bookshelf.model.Category)}.
-	 */
-	public void testInsertCategory() {
-		Category goodCategory = new Category();
-		goodCategory.setName("name");
-
-		// try insert good category
-		long insertedRows = 0;
+	
+	public void testInsertUpdateDeleteCategory() {
+		Category goodCategory = new Category("name");
+		
+		// try to insert a good category
+		long insertedCategoryId = -1;
 		try {
-			insertedRows = categoryDAO.insertCategory(goodCategory);
+			insertedCategoryId = categoryDAO.insertCategory(goodCategory);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-		assertTrue("insertBook should return a positive number of inserted rows when successful", 
-				insertedRows > 0);
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#updateCategory(com.project.bookshelf.model.Category)}.
-	 */
-	public void testUpdateCategory() {
-		Category goodCategory = new Category();
-		goodCategory.setName("name");
-
-		// try update good category
+		assertFalse("insertCategory should not return -1 after inserting a good category", 
+				insertedCategoryId == -1);	
+		List<Category> categories = categoryDAO.getAllCategories();
+		assertTrue("The database should contain one category after the first insert", categories.size() == 1);
+		assertEquals("The name of the category in the database should match the inserted category", 
+				categories.get(0).getName(), goodCategory.getName());
+		
+		// try to update the category
+		goodCategory = categories.get(0);
+		goodCategory.setName("newName");
 		long updatedRows = 0;
 		try {
 			updatedRows = categoryDAO.updateCategory(goodCategory);
@@ -85,18 +86,16 @@ public class CategoryDAOTest extends AndroidTestCase {
 			e.printStackTrace();
 			fail();
 		}
-		assertTrue("updateCategory should return a positive number of updated rows when successful", 
-				updatedRows > 0);
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#deleteCategory(com.project.bookshelf.model.Category)}.
-	 */
-	public void testDeleteCategory() {
-		Category goodCategory = new Category();
-		goodCategory.setName("name");
-
-		// try delete good category
+		assertTrue("updateCategory should return 1 after updating 1 row", 
+				updatedRows == 1);
+		categories = categoryDAO.getAllCategories();
+		assertTrue("The database should contain one category after the first update", 
+				categories.size() == 1);
+		assertEquals("The name of the category in the database should match the updated category", 
+				categories.get(0).getName(), goodCategory.getName());
+		
+		// try to delete the category
+		goodCategory = categories.get(0);
 		long deletedRows = 0;
 		try {
 			deletedRows = categoryDAO.deleteCategory(goodCategory);
@@ -104,22 +103,19 @@ public class CategoryDAOTest extends AndroidTestCase {
 			e.printStackTrace();
 			fail();
 		}
-		assertTrue("deleteCategory should return a positive number of deleted rows when successful", 
-				deletedRows > 0);
+		assertTrue("deleteCategory should return 1 after deleting 1 row",
+				deletedRows == 1);
+		categories = categoryDAO.getAllCategories();
+		assertTrue("The database should contain no categories after deleting the only category", 
+				categories.size() == 0);
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#addCategoryForBook(com.project.bookshelf.model.Category, com.project.bookshelf.model.Book)}.
 	 */
 	public void testAddCategoryForBook() {
-		Book goodBook = new Book();
-		goodBook.setAuthor("author");
-		goodBook.setFileName("fileName");
-		goodBook.setTitle("title");
-		goodBook.setBookmark(-1);
-
-		Category goodCategory = new Category();
-		goodCategory.setName("name");
+		Book goodBook = new Book("fileName", "title", "author");
+		Category goodCategory = new Category("name");
 
 		long id = -1;
 		try {
@@ -130,17 +126,15 @@ public class CategoryDAOTest extends AndroidTestCase {
 		}
 		assertFalse("addCategoryForBook should return the id of the mapping if successful", 
 				id == -1);
+		
+		fail("not yet implemented");
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#getCategoriesByBook(com.project.bookshelf.model.Book)}.
 	 */
 	public void testGetCategoriesByBook() {
-		Book goodBook = new Book();
-		goodBook.setAuthor("author");
-		goodBook.setFileName("fileName");
-		goodBook.setTitle("title");
-		goodBook.setBookmark(-1);
+		Book goodBook = new Book("fileName", "title", "author");
 
 		List<Category> categories = null;
 		try {
@@ -150,6 +144,8 @@ public class CategoryDAOTest extends AndroidTestCase {
 			fail();
 		}
 		assertNotNull("getCategoriesByBook should return a list of Categories", categories);
+		
+		fail("not yet implemented");
 	}
 
 	/**
@@ -164,6 +160,8 @@ public class CategoryDAOTest extends AndroidTestCase {
 			fail();
 		}
 		assertNotNull("getAllCategories should return a list of Categories", categories);
+		
+		fail("not yet implemented");
 	}
 
 }
