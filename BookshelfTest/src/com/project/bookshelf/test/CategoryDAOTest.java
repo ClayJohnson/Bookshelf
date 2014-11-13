@@ -21,6 +21,7 @@ import android.test.RenamingDelegatingContext;
 public class CategoryDAOTest extends AndroidTestCase {
 
 	private CategoryDAO categoryDAO;
+	private BookDAO bookDAO;
 	
 	/**
 	 * @param name
@@ -35,23 +36,31 @@ public class CategoryDAOTest extends AndroidTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		RenamingDelegatingContext context = new RenamingDelegatingContext(
-				getContext(), "test_");
+				getContext(), "CategoryDAOtest_");
 		categoryDAO = new CategoryDAO(context);
 		categoryDAO.open();
+		bookDAO = new BookDAO(context);
+		bookDAO.open();
 	}
 
 	/* (non-Javadoc)
 	 * @see android.test.AndroidTestCase#tearDown()
 	 */
-	protected void tearDown() throws Exception {
+	protected void tearDown() throws Exception {		
+		super.tearDown();
 		// wipe the database clean
-//		List<Category> categories = categoryDAO.getAllCategories();
-//		for (Category category : categories) {
-//			categoryDAO.deleteCategory(category);
-//		}		
+		List<Category> categories = categoryDAO.getAllCategories();
+		for (Category category : categories) {
+			categoryDAO.deleteCategory(category);
+		}	
+		List<Book> books = bookDAO.getAllBooks();
+		for (Book book : books) {
+			bookDAO.deleteBook(book);
+		}
 		categoryDAO.close();
 		categoryDAO = null;
-		super.tearDown();
+		bookDAO.close();
+		bookDAO = null;
 	}
 
 	public void testPreconditions() {
@@ -113,10 +122,20 @@ public class CategoryDAOTest extends AndroidTestCase {
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#addCategoryForBook(com.project.bookshelf.model.Category, com.project.bookshelf.model.Book)}.
 	 */
-	public void testAddCategoryForBook() {
+	public void testAddCategoryForBookGetCategoriesByBook() {
 		Book goodBook = new Book("fileName", "title", "author");
 		Category goodCategory = new Category("name");
 
+		// add book and category to database
+		try {
+			bookDAO.insertBook(goodBook);
+			categoryDAO.insertCategory(goodCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		// add the mapping between book and category
 		long id = -1;
 		try {
 			id = categoryDAO.addCategoryForBook(goodCategory, goodBook);
@@ -127,15 +146,6 @@ public class CategoryDAOTest extends AndroidTestCase {
 		assertFalse("addCategoryForBook should return the id of the mapping if successful", 
 				id == -1);
 		
-		fail("not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#getCategoriesByBook(com.project.bookshelf.model.Book)}.
-	 */
-	public void testGetCategoriesByBook() {
-		Book goodBook = new Book("fileName", "title", "author");
-
 		List<Category> categories = null;
 		try {
 			categories = categoryDAO.getCategoriesByBook(goodBook);
@@ -144,14 +154,28 @@ public class CategoryDAOTest extends AndroidTestCase {
 			fail();
 		}
 		assertNotNull("getCategoriesByBook should return a list of Categories", categories);
-		
-		fail("not yet implemented");
+		assertTrue("getCategoriesByBook should return the right number of categories, actual number:" 
+		   + categories.size(), categories.size() == 1);
+		assertEquals("getCategoriesByBook should return the right categories", goodCategory, categories.get(0));
 	}
 
 	/**
 	 * Test method for {@link com.project.bookshelf.database.CategoryDAO#getAllCategories()}.
 	 */
 	public void testGetAllCategories() {
+		Category category1 = new Category("name1");
+		Category category2 = new Category("name2");
+		Category category3 = new Category("name3");
+		
+		try {
+			categoryDAO.insertCategory(category1);
+			categoryDAO.insertCategory(category2);
+			categoryDAO.insertCategory(category3);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		
 		List<Category> categories = null;
 		try {
 			categories = categoryDAO.getAllCategories();
@@ -160,8 +184,8 @@ public class CategoryDAOTest extends AndroidTestCase {
 			fail();
 		}
 		assertNotNull("getAllCategories should return a list of Categories", categories);
-		
-		fail("not yet implemented");
+		assertTrue("getAllCategories should return the correct number of Categories",
+				categories.size() == 3);
 	}
 
 }
