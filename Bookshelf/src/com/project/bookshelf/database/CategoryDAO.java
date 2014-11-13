@@ -93,16 +93,14 @@ public class CategoryDAO extends BookshelfDBDAO {
 		Log.d("Update Result:", "=" + result);
 		return result;
 	}
-
+	
 	/**
 	 * Deletes a category from the table.
-	 * 
-	 * @param category
-	 *            the category to be deleted
-	 * @return the number of rows deleted
+	 * @param category the category to be deleted
+	 * @return the number of deleted rows
 	 */
 	public int deleteCategory(Category category) {
-
+		
 		// delete mappings to books for this category
 		database.delete(MySQLiteHelper.TABLE_MAPPING, WHERE_CATEGORY_ID_EQUALS,
 				new String[] { category.getId() + "" });
