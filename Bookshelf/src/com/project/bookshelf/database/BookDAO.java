@@ -81,6 +81,10 @@ public class BookDAO extends BookshelfDBDAO {
 	 */
 	public long insertBook(Book book) {
 		ContentValues values = new ContentValues();
+		// specify the book's id if it was set, otherwise let it autoincrement
+		if (book.getId() != -1) {
+			values.put(MySQLiteHelper.COLUMN_ID, book.getId());
+		}
 		values.put(MySQLiteHelper.BOOK_FILENAME, book.getFileName());
 		values.put(MySQLiteHelper.BOOK_TITLE, book.getTitle());
 		values.put(MySQLiteHelper.BOOK_AUTHOR, book.getAuthor());

@@ -26,6 +26,7 @@ public class Category implements Parcelable {
 	
 	public Category(String name) {
 		super();
+		this.id = -1;
 		this.name = name;
 	}
 	

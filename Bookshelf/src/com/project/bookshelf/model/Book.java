@@ -55,6 +55,8 @@ public class Book implements Parcelable {
 	 *            the author of the book used for sorting and display purposes
 	 */
 	public Book(String fileName, String title, String author) {
+		super();
+		this.id = -1;
 		this.fileName = fileName;
 		this.title = title;
 		this.author = author;

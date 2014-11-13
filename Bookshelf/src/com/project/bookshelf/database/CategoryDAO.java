@@ -71,6 +71,10 @@ public class CategoryDAO extends BookshelfDBDAO {
 	 */
 	public long insertCategory(Category category) {
 		ContentValues values = new ContentValues();
+		// specify the category's id if it was set, otherwise autoincrement
+		if (category.getId() != -1) {
+			values.put(MySQLiteHelper.COLUMN_ID, category.getId());
+		}
 		values.put(MySQLiteHelper.CATEGORY_NAME, category.getName());
 
 		return database.insert(MySQLiteHelper.TABLE_CATEGORY, null, values);
