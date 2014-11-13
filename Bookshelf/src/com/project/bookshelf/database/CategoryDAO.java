@@ -15,21 +15,20 @@ import android.database.Cursor;
 import android.util.Log;
 
 /**
- * CategoryDAO is a data access object which handles connection to the database and
- * access and modification of data relating to Categories.  Database objects are
- * converted to/from Category objects so that calling code does not need to know
- * the database structure.
+ * CategoryDAO is a data access object which handles connection to the database
+ * and access and modification of data relating to Categories. Database objects
+ * are converted to/from Category objects so that calling code does not need to
+ * know the database structure.
  * 
- * To use CategoryDAO in an activity, create it as an object and pass it the 
- * activity's context.  First, call the open method to get a handle to the database,
- * then call any of the other methods you wish to interact with the database.  Call
- * the close method when you are done to destroy the database handle.
+ * To use CategoryDAO in an activity, create it as an object and pass it the
+ * activity's context. First, call the open method to get a handle to the
+ * database, then call any of the other methods you wish to interact with the
+ * database. Call the close method when you are done to destroy the database
+ * handle.
  * 
  * Example usage to retrieve a list of all Categories contained in the database:
- * datasource = new CategoryDAO(this);
- * datasource.open();
- * List<Category> Categories = datasource.getAllCategories();
- * datasource.close();
+ * datasource = new CategoryDAO(this); datasource.open(); List<Category>
+ * Categories = datasource.getAllCategories(); datasource.close();
  * 
  * @author Clay
  * 
@@ -44,11 +43,19 @@ public class CategoryDAO extends BookshelfDBDAO {
 
 	// raw query to find all the categories a book belongs to
 	private static final String RAW_CATEGORIES_MAPPED_TO_BOOK = "SELECT category."
-			+ MySQLiteHelper.COLUMN_ID + ", category." + MySQLiteHelper.CATEGORY_NAME
-			+ " FROM " + MySQLiteHelper.TABLE_MAPPING + " mapping INNER JOIN "
-			+ MySQLiteHelper.TABLE_CATEGORY + " category ON " + " mapping."
-			+ MySQLiteHelper.MAPPING_CATEGORY_ID + "=category."
-			+ MySQLiteHelper.COLUMN_ID + " WHERE mapping."
+			+ MySQLiteHelper.COLUMN_ID
+			+ ", category."
+			+ MySQLiteHelper.CATEGORY_NAME
+			+ " FROM "
+			+ MySQLiteHelper.TABLE_MAPPING
+			+ " mapping INNER JOIN "
+			+ MySQLiteHelper.TABLE_CATEGORY
+			+ " category ON "
+			+ " mapping."
+			+ MySQLiteHelper.MAPPING_CATEGORY_ID
+			+ "=category."
+			+ MySQLiteHelper.COLUMN_ID
+			+ " WHERE mapping."
 			+ MySQLiteHelper.MAPPING_BOOK_ID + "=?";
 
 	// Database fields
@@ -97,14 +104,16 @@ public class CategoryDAO extends BookshelfDBDAO {
 		Log.d("Update Result:", "=" + result);
 		return result;
 	}
-	
+
 	/**
 	 * Deletes a category from the table.
-	 * @param category the category to be deleted
+	 * 
+	 * @param category
+	 *            the category to be deleted
 	 * @return the number of deleted rows
 	 */
 	public int deleteCategory(Category category) {
-		
+
 		// delete mappings to books for this category
 		database.delete(MySQLiteHelper.TABLE_MAPPING, WHERE_CATEGORY_ID_EQUALS,
 				new String[] { category.getId() + "" });
@@ -116,18 +125,26 @@ public class CategoryDAO extends BookshelfDBDAO {
 
 	/**
 	 * Add a Category for a Book by adding an entry into the mapping table.
-	 * @param category the category to be mapped to a book
-	 * @param book the book to be mapped to a category
+	 * 
+	 * @param category
+	 *            the category to be mapped to a book
+	 * @param book
+	 *            the book to be mapped to a category
 	 * @return the ID of the new mapping entry, or -1 if an error occurred
 	 */
 	public long addCategoryForBook(Category category, Book book) {
-		ContentValues values = new ContentValues();	
-		values.put(MySQLiteHelper.MAPPING_CATEGORY_ID, category.getId());
-		values.put(MySQLiteHelper.MAPPING_BOOK_ID, book.getId());
-		
+		ContentValues values = new ContentValues();
+
+		if (book.getId() != -1 && category.getId() != -1) {
+			values.put(MySQLiteHelper.MAPPING_CATEGORY_ID, category.getId());
+			values.put(MySQLiteHelper.MAPPING_BOOK_ID, book.getId());
+		} else {
+			return -1;
+		}
+
 		return database.insert(MySQLiteHelper.TABLE_MAPPING, null, values);
 	}
-	
+
 	/**
 	 * Fetches all Categories a Book belongs to
 	 * 
@@ -181,9 +198,12 @@ public class CategoryDAO extends BookshelfDBDAO {
 	 *         row
 	 */
 	private Category cursorToCategory(Cursor cursor) {
+
 		long id = cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX);
 		String name = cursor.getString(MySQLiteHelper.CATEGORY_NAME_INDEX);
+
 		Category category = new Category(id, name);
+
 		return category;
 	}
 

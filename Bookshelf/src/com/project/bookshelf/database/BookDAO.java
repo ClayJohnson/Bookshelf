@@ -18,20 +18,19 @@ import android.util.Log;
 
 /**
  * BookDAO is a data access object which handles connection to the database and
- * access and modification of data relating to books.  Database objects are
- * converted to/from Book objects so that calling code does not need to know
- * the database structure.
+ * access and modification of data relating to books. Database objects are
+ * converted to/from Book objects so that calling code does not need to know the
+ * database structure.
  * 
- * To use BookDAO in an activity, create it as an object and pass it the 
- * activity's context.  First, call the open method to get a handle to the database,
- * then call any of the other methods you wish to interact with the database.  Call
- * the close method when you are done to destroy the database handle.
+ * To use BookDAO in an activity, create it as an object and pass it the
+ * activity's context. First, call the open method to get a handle to the
+ * database, then call any of the other methods you wish to interact with the
+ * database. Call the close method when you are done to destroy the database
+ * handle.
  * 
  * Example usage to retrieve a list of all Books contained in the database:
- * datasource = new BookDAO(this);
- * datasource.open();
- * List<Book> books = datasource.getAllBooks();
- * datasource.close();
+ * datasource = new BookDAO(this); datasource.open(); List<Book> books =
+ * datasource.getAllBooks(); datasource.close();
  * 
  * @author Clay
  * 
@@ -50,13 +49,16 @@ public class BookDAO extends BookshelfDBDAO {
 
 	// raw query to find all the books a category contains
 	private static final String RAW_BOOKS_MAPPED_TO_CATEGORY = "SELECT book."
-			+ MySQLiteHelper.COLUMN_ID + ", book." + MySQLiteHelper.BOOK_FILENAME
-			+ ", book." + MySQLiteHelper.BOOK_TITLE + ", book."
-			+ MySQLiteHelper.BOOK_AUTHOR + ", book." + MySQLiteHelper.BOOK_BOOKMARK
-			+ " FROM " + MySQLiteHelper.TABLE_MAPPING + " mapping INNER JOIN "
+			+ MySQLiteHelper.COLUMN_ID + ", book."
+			+ MySQLiteHelper.BOOK_FILENAME + ", book."
+			+ MySQLiteHelper.BOOK_TITLE + ", book."
+			+ MySQLiteHelper.BOOK_AUTHOR + ", book."
+			+ MySQLiteHelper.BOOK_BOOKMARK + " FROM "
+			+ MySQLiteHelper.TABLE_MAPPING + " mapping INNER JOIN "
 			+ MySQLiteHelper.TABLE_BOOK + " book ON " + " mapping."
-			+ MySQLiteHelper.MAPPING_BOOK_ID + "=book." + MySQLiteHelper.COLUMN_ID
-			+ " WHERE mapping." + MySQLiteHelper.MAPPING_CATEGORY_ID + "=?";
+			+ MySQLiteHelper.MAPPING_BOOK_ID + "=book."
+			+ MySQLiteHelper.COLUMN_ID + " WHERE mapping."
+			+ MySQLiteHelper.MAPPING_CATEGORY_ID + "=?";
 
 	// Database fields
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
@@ -92,7 +94,6 @@ public class BookDAO extends BookshelfDBDAO {
 
 		return database.insert(MySQLiteHelper.TABLE_BOOK, null, values);
 	}
-	
 
 	/**
 	 * Updates a book in the table.
@@ -132,18 +133,25 @@ public class BookDAO extends BookshelfDBDAO {
 		return database.delete(MySQLiteHelper.TABLE_BOOK, WHERE_ID_EQUALS,
 				new String[] { book.getId() + "" });
 	}
-	
+
 	/**
 	 * Add a Book to a Category by adding an entry into the mapping table.
-	 * @param book the book to be mapped to a category
-	 * @param category the category to be mapped to a book
+	 * 
+	 * @param book
+	 *            the book to be mapped to a category
+	 * @param category
+	 *            the category to be mapped to a book
 	 * @return the ID of the new mapping entry, or -1 if an error occurred
 	 */
 	public long addBookToCategory(Book book, Category category) {
 		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.MAPPING_BOOK_ID, book.getId());
-		values.put(MySQLiteHelper.MAPPING_CATEGORY_ID, category.getId());
-		
+
+		if (book.getId() != -1 && category.getId() != -1) {
+			values.put(MySQLiteHelper.MAPPING_BOOK_ID, book.getId());
+			values.put(MySQLiteHelper.MAPPING_CATEGORY_ID, category.getId());
+		} else {
+			return -1;
+		}
 		return database.insert(MySQLiteHelper.TABLE_MAPPING, null, values);
 	}
 
@@ -245,16 +253,16 @@ public class BookDAO extends BookshelfDBDAO {
 	 * @return a Book object filled in with the information from the table row
 	 */
 	private Book cursorToBook(Cursor cursor) {
-		
+
 		long id = cursor.getLong(MySQLiteHelper.COLUMN_ID_INDEX);
 		String fileName = cursor.getString(MySQLiteHelper.BOOK_FILENAME_INDEX);
 		String title = cursor.getString(MySQLiteHelper.BOOK_TITLE_INDEX);
 		String author = cursor.getString(MySQLiteHelper.BOOK_AUTHOR_INDEX);
 		long bookmark = cursor.getLong(MySQLiteHelper.BOOK_BOOKMARK_INDEX);
-		
+
 		Book book = new Book(id, fileName, title, author);
 		book.setBookmark(bookmark);
-		
+
 		return book;
 	}
 
