@@ -47,6 +47,7 @@ public class BookDAOTest extends AndroidTestCase {
 	 */
 	protected void tearDown() throws Exception {
 		bookDAO.close();
+		bookDAO = null;
 		super.tearDown();
 	}
 
@@ -54,43 +55,36 @@ public class BookDAOTest extends AndroidTestCase {
 		assertNotNull(bookDAO);
 	}
 
-	/**
-	 * Test method for
-	 * {@link com.project.bookshelf.database.BookDAO#insertBook(com.project.bookshelf.model.Book)}
-	 * .
-	 */
-	public void testInsertBook() {
-		Book goodBook = new Book();
-		goodBook.setAuthor("author");
-		goodBook.setFileName("fileName");
-		goodBook.setTitle("title");
-		goodBook.setBookmark(-1);
-
-		// try insert good book
-		long insertedRows = 0;
+	public void testInsertUpdateDeleteBook() {
+		Book goodBook = new Book("fileName", "title", "author");
+		
+		// try to insert a good book
+		long insertedBookId = -1;
 		try {
-			insertedRows = bookDAO.insertBook(goodBook);
+			insertedBookId = bookDAO.insertBook(goodBook);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
-		assertFalse("insertBook should return a positive number of inserted rows when successful", 
-				insertedRows == 0);
-	}
-
-	/**
-	 * Test method for
-	 * {@link com.project.bookshelf.database.BookDAO#updateBook(com.project.bookshelf.model.Book)}
-	 * .
-	 */
-	public void testUpdateBook() {
-		Book goodBook = new Book();
-		goodBook.setAuthor("author");
-		goodBook.setFileName("fileName");
-		goodBook.setTitle("title");
-		goodBook.setBookmark(-1);
-
-		// try insert good book
+		assertFalse("insertBook should not return -1 after inserting a good book", 
+				insertedBookId == -1);		
+		List<Book> books = bookDAO.getAllBooks();
+		assertTrue("The database should contain one book after the first insert", books.size() == 1);
+		assertEquals("The fileName of the book in the database should match the inserted book", 
+				books.get(0).getFileName(), goodBook.getFileName());
+		assertEquals("The title of the book in the database should match the inserted book", 
+				books.get(0).getTitle(), goodBook.getTitle());
+		assertEquals("The author of the book in the database should match the inserted book", 
+				books.get(0).getAuthor(), goodBook.getAuthor());
+		assertTrue("The bookmark of the book in the database should match the inserted book", 
+				books.get(0).getBookmark() == goodBook.getBookmark());
+			
+		// try to update the book
+		goodBook = books.get(0);
+		goodBook.setFileName("newFileName");
+		goodBook.setTitle("newTitle");
+		goodBook.setAuthor("newAuthor");
+		goodBook.setBookmark(5);
 		long updatedRows = 0;
 		try {
 			updatedRows = bookDAO.updateBook(goodBook);
@@ -98,23 +92,22 @@ public class BookDAOTest extends AndroidTestCase {
 			e.printStackTrace();
 			fail();
 		}
-		assertFalse("updateBook should return a positive number of updated rows when successful", 
-				updatedRows == 0);
-	}
-
-	/**
-	 * Test method for
-	 * {@link com.project.bookshelf.database.BookDAO#deleteBook(com.project.bookshelf.model.Book)}
-	 * .
-	 */
-	public void testDeleteBook() {
-		Book goodBook = new Book();
-		goodBook.setAuthor("author");
-		goodBook.setFileName("fileName");
-		goodBook.setTitle("title");
-		goodBook.setBookmark(-1);
-
-		// try delete good book
+		assertTrue("updateBook should return 1 after updating 1 row", 
+				updatedRows == 1);
+		books = bookDAO.getAllBooks();
+		assertTrue("The database should contain one book after the first update", 
+				books.size() == 1);
+		assertEquals("The fileName of the book in the database should match the updated book", 
+				books.get(0).getFileName(), goodBook.getFileName());
+		assertEquals("The title of the book in the database should match the updated book", 
+				books.get(0).getTitle(), goodBook.getTitle());
+		assertEquals("The author of the book in the database should match the updated book", 
+				books.get(0).getAuthor(), goodBook.getAuthor());
+		assertTrue("The bookmarked page of the book in the database should match the updated book", 
+				books.get(0).getBookmark() == goodBook.getBookmark());
+		goodBook = books.get(0);
+		
+		// try to delete the book		
 		long deletedRows = 0;
 		try {
 			deletedRows = bookDAO.deleteBook(goodBook);
@@ -122,9 +115,13 @@ public class BookDAOTest extends AndroidTestCase {
 			e.printStackTrace();
 			fail();
 		}
-		assertFalse("deleteBook should return a positve number of deleted rows when successul", 
-				deletedRows == 0);
+		assertTrue("deleteBook should return 1 after deleting 1 book",
+				deletedRows == 1);
+		books = bookDAO.getAllBooks();
+		assertTrue("The database should contain no books after deleting the only book", 
+				books.size() == 0);
 	}
+
 
 	/**
 	 * Test method for
@@ -132,14 +129,8 @@ public class BookDAOTest extends AndroidTestCase {
 	 * .
 	 */
 	public void testAddBookToCategory() {
-		Book goodBook = new Book();
-		goodBook.setAuthor("author");
-		goodBook.setFileName("fileName");
-		goodBook.setTitle("title");
-		goodBook.setBookmark(-1);
-
-		Category goodCategory = new Category();
-		goodCategory.setName("name");
+		Book goodBook = new Book("fileName", "title", "author");
+		Category goodCategory = new Category("name");
 
 		long id = -1;
 		try {
@@ -168,6 +159,8 @@ public class BookDAOTest extends AndroidTestCase {
 			fail();
 		}
 		assertNotNull("getBooksByAuthor should return a list of Books when successful", books);
+		
+		fail("NYI");
 	}
 
 	/**
@@ -186,6 +179,8 @@ public class BookDAOTest extends AndroidTestCase {
 			fail();
 		}
 		assertNotNull("getBooksByTitle should return a list of Books when successful", books);
+		
+		fail("NYI");
 	}
 
 	/**
@@ -194,8 +189,7 @@ public class BookDAOTest extends AndroidTestCase {
 	 * .
 	 */
 	public void testGetBooksByCategory() {
-		Category goodCategory = new Category();
-		goodCategory.setName("name");
+		Category goodCategory = new Category("name");
 
 		List<Book> books = null;
 		try {
