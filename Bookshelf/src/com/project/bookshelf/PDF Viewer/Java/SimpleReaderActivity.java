@@ -36,7 +36,8 @@ public class SimpleReaderActivity extends Activity{
 
         PDFDocument.setFontPath("/mnt/sdcard");
         PDFDocument.setFontMap("Malgun=malgun.ttf:*=malgun.ttf");
-    // place pdf filename and path variable in place of PDF filename in statement below
+        // place pdf filename and path variable in place of PDF filename in statement below
+        //If file is not a pdf an exception error is thrown
         String fileName = new String("FullParentHandout.pdf");
 
          AssetManager am = getResources().getAssets();

@@ -20,6 +20,8 @@ import com.epapyrus.plugpdf.core.PlugPDFException.LicenseUnusableOS;
 import com.epapyrus.plugpdf.core.PlugPDFException.LicenseWrongProductVersion;
 public class PlugPDFLauncherApplication  extends Application {
     @Override
+
+    //If key and package do not match then an exception will be thrown
     public void onCreate() {
         super.onCreate();
 
