@@ -80,7 +80,7 @@ public class SingleViewActivity extends Activity {
 			// new
 			myReader.close();
 
-			Toast.makeText(getBaseContext(), "Done reading SD 'mysdfile.txt'",
+			Toast.makeText(getBaseContext(), "Done reading SD 'SDFILE.txt'",
 					Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
 			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT)

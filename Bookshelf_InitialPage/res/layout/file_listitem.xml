@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent" >
+
+     <TextView
+         android:id="@+id/fname"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:text="Large Text"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15dp" />
+
+     <Button
+         android:id="@+id/loadintobookshelf"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="wrap_content"
+         android:layout_height="26dp"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true"
+         android:gravity="bottom"
+         android:minHeight="10dp"
+         android:minWidth="10dp"
+         android:text="Load into Bookshelf"
+         android:textSize="7dp"
+         android:textStyle="normal"
+         android:typeface="sans" />
+     
+ </RelativeLayout>
+

@@ -1,4 +1,4 @@
-package com.example.zoomfragment;
+package com.example.bookshelf_initialpage;
 
 /*Author Anjana Chatta*/
 
@@ -22,7 +22,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ZoomControls;
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivityViewPager extends FragmentActivity implements
 		View.OnClickListener {
 	private ViewPager viewPager;
 	StringBuilder sb_text;
@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.viewpageractivity_main);
 
 		String ExternalStorageDirectoryPath = Environment
 				.getExternalStorageDirectory().getAbsolutePath();
