@@ -1,7 +1,5 @@
 package com.example.bookshelf_initialpage;
 
-/*Author Anjana Chatta*/
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,15 +7,39 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.Hashtable;
 import java.util.List;
 
-public class Custom_PagerAdpater extends FragmentPagerAdapter {
+/**
+ * COMMENT DESCRIPTION OF CLASS TO BE FILLED IN
+ * 
+ * @author Anjana Chatta
+ * 
+ */
+public class Custom_PagerAdapter extends FragmentPagerAdapter {
 
 	private final List<CharSequence> pageTexts;
 
 	Hashtable<Integer, Fragment> mPageReferenceMap = new Hashtable<Integer, Fragment>();
 
-	public Custom_PagerAdpater(FragmentManager fm, List<CharSequence> pageTexts) {
+	/**
+	 * Constructor
+	 * 
+	 * @param fm
+	 * @param pageTexts
+	 */
+	public Custom_PagerAdapter(FragmentManager fm, List<CharSequence> pageTexts) {
 		super(fm);
 		this.pageTexts = pageTexts;
+
+	}
+
+	/**
+	 * new
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public Fragment getFragment(int key) {
+
+		return mPageReferenceMap.get(key);
 
 	}
 
@@ -29,15 +51,6 @@ public class Custom_PagerAdpater extends FragmentPagerAdapter {
 		mPageReferenceMap.put(i, frag);
 		return frag;
 	}
-
-	// new
-	public Fragment getFragment(int key) {
-
-		return mPageReferenceMap.get(key);
-
-	}
-
-	//
 
 	@Override
 	public int getCount() {
