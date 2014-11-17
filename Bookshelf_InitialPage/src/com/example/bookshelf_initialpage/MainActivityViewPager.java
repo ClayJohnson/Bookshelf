@@ -1,7 +1,5 @@
 package com.example.bookshelf_initialpage;
 
-/*Author Anjana Chatta*/
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +20,12 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ZoomControls;
 
+/**
+ * CLASS DESCRIPTION TBI
+ * 
+ * @author Anjana Chatta
+ * 
+ */
 public class MainActivityViewPager extends FragmentActivity implements
 		View.OnClickListener {
 	private ViewPager viewPager;
