@@ -13,12 +13,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * DESCRIPTION OF CLASS TO BE FILLED IN
+ * 
+ * @author Anjana Chatta
+ * 
+ */
 @SuppressLint("NewApi")
 public class Fragments extends Fragment implements View.OnClickListener {
 	private final static String strText = "TEXT";
 	TextView textView;
 	public Button btnDay, btnNight;
 
+	/**
+	 * DESCRIPTION OF METHOD TO BE FILLED IN
+	 * 
+	 * @param pageText
+	 *            DESCRIPTON OF PARAMETER TO BE FILLED IN
+	 * @return DESCRIPTION OF RETURN VALUE TO BE FILLED IN
+	 */
 	public static Fragments newInstance(CharSequence pageText) {
 		Fragments fragments = new Fragments();
 		Bundle bundle = new Bundle();
@@ -39,11 +52,17 @@ public class Fragments extends Fragment implements View.OnClickListener {
 		return textView;
 	}
 
+	/**
+	 * DESCRIPTION OF METHOD TO BE FILLED IN
+	 */
 	public void changeDAYColor() {
 		textView.setTextColor(Color.BLACK);
 		textView.setBackgroundColor(Color.WHITE);
 	}
 
+	/**
+	 * DESCRIPTION OF METHOD TO BE FILLED IN
+	 */
 	public void changeNIGHTColor() {
 
 		textView.setTextColor(Color.WHITE);
@@ -51,10 +70,16 @@ public class Fragments extends Fragment implements View.OnClickListener {
 
 	}
 
+	/**
+	 * DESCRIPTION OF METHOD TO BE FILLED IN
+	 */
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 	}
 
+	/**
+	 * DESCRIPTION OF METHOD TO BE FILLED IN
+	 */
 	@SuppressLint("NewApi")
 	public void zoom_IN() {
 		// TODO Auto-generated method stub
@@ -67,6 +92,9 @@ public class Fragments extends Fragment implements View.OnClickListener {
 
 	}
 
+	/**
+	 * DESCRIPTION OF METHOD TO BE FILLED IN
+	 */
 	public void zoom_OUT() {
 		// TODO Auto-generated method stub
 
