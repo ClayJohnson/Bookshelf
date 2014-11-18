@@ -1,6 +1,10 @@
 package com.example.bookshelf_initialpage;
 
-/*Author Anjana Chatta*/
+/**@author Anjana
+ * This class opens a text file from the SD card and displays the contents on a Fragment of the viewPager
+ * Read pages enables to swipe pages both ways. Zom in Zoom out of pages are enabled
+ * 
+ */
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,7 +61,6 @@ public class MainActivityViewPager extends FragmentActivity implements
 								viewPager.getWidth(), viewPager.getHeight(), 1,
 								0);
 
-						// TextPaint textPaint = new TextPaint();
 						textPaint = new TextPaint();
 						textPaint.setTextSize(getResources().getDimension(
 								R.dimen.text_size));

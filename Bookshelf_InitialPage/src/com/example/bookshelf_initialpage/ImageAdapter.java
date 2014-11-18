@@ -1,5 +1,10 @@
 package com.example.bookshelf_initialpage;
 
+/**
+ * @author Anjana
+ * Populates the Gridview with Book cover icons
+ * 
+ */
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.view.View;
@@ -9,7 +14,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 
-//public class ImageAdapter implements ListAdapter {
 public class ImageAdapter extends BaseAdapter {
 	   private Context mContext;
 

@@ -4,12 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
             android:id="@+id/loadbutton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-           
             android:gravity="center"
             android:minHeight="10dp"
             android:minWidth="10dp"
@@ -18,6 +21,34 @@
             android:textStyle="normal"
             android:typeface="sans" />
 
+        <Button
+            android:id="@+id/categorybutton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:gravity="center"
+            android:minHeight="10dp"
+            android:minWidth="10dp"
+            android:text="Category"
+            android:textSize="7dp"
+            android:textStyle="normal"
+            android:typeface="sans" />
+
+        <Button
+            android:id="@+id/searchbutton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:gravity="center"
+            android:minHeight="10dp"
+            android:minWidth="10dp"
+            android:text="Search"
+            android:textSize="7dp"
+            android:textStyle="normal"
+            android:typeface="sans" />
+
+    </LinearLayout>
+      
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"

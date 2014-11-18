@@ -14,8 +14,8 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -26,18 +26,45 @@
             </intent-filter>
         </activity>
         
-         <activity
+        
+        <activity
             android:name=".MainActivityViewPager"
-            android:label="@string/app_name" >
+            android:label="Read_Text" >
         </activity>
+        
         
         <activity
             android:name=".Load_Activity"
-            android:label="@string/title_activity_load_" >
+            android:label="Load / Delete Book" >
+           <intent-filter android:label="Load/Delete Book">
+		      <action android:name="android.intent.action.MAIN" />
+		      <category android:name="android.intent.category.LAUNCHER" />
+		  </intent-filter>
+         </activity>
+        
+        
+        <activity
+            android:name=".Category_Activity"
+            android:label="Add / Delete Category" >
+            <intent-filter android:label="Add/Delete Category">
+		      <action android:name="android.intent.action.MAIN" />
+		      <category android:name="android.intent.category.LAUNCHER" />
+		  </intent-filter>
         </activity>
         
-       
         
+        <activity
+            android:name=".Search_Activity"
+            android:label="@string/title_activity_search_" >
+             <intent-filter android:label="Search">
+		      <action android:name="android.intent.action.MAIN" />
+		      <category android:name="android.intent.category.LAUNCHER" />
+		  </intent-filter>
+        </activity>
     </application>
 
-</manifest>
+</manifest><!--
+ android:label="@string/title_activity_load_" >  android:label="@string/app_name"
+ android:label="@string/app_name"
+-->
+

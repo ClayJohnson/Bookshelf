@@ -1,6 +1,8 @@
 package com.example.bookshelf_initialpage;
 
-/*Author Anjana Chatta*/
+/**@author Anjana
+ * Page fragments references
+ */
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,20 +26,16 @@ public class Custom_PagerAdpater extends FragmentPagerAdapter {
 	@Override
 	public Fragment getItem(int i) {
 		// return Fragments.newInstance(pageTexts.get(i));
-
 		Fragment frag = Fragments.newInstance(pageTexts.get(i));
 		mPageReferenceMap.put(i, frag);
 		return frag;
 	}
 
-	// new
 	public Fragment getFragment(int key) {
 
 		return mPageReferenceMap.get(key);
 
 	}
-
-	//
 
 	@Override
 	public int getCount() {

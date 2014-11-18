@@ -105,11 +105,11 @@ public class MainActivityViewPager extends FragmentActivity implements
 
 		btnDay = (Button) findViewById(R.id.button1);
 		btnNight = (Button) findViewById(R.id.button2);
-		btnDay.setOnClickListener(this);
-		btnNight.setOnClickListener(this);
-
 		btnzoom_in = (Button) findViewById(R.id.button3);
 		btnzoom_out = (Button) findViewById(R.id.button4);
+		
+		btnDay.setOnClickListener(this);
+		btnNight.setOnClickListener(this);
 		btnzoom_in.setOnClickListener(this);
 		btnzoom_out.setOnClickListener(this);
 
