@@ -1,4 +1,4 @@
-package com.example.bookshelf_initialpage;
+ package com.example.bookshelf_initialpage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,12 +23,6 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-/**
- * DESCRIPTION OF CLASS TBI
- * 
- * @author Anjana Chatta
- * 
- */
 public class Load_Activity extends ActionBarActivity implements
 		OnItemLongClickListener, View.OnClickListener {
 
@@ -39,7 +33,8 @@ public class Load_Activity extends ActionBarActivity implements
 	public Button btnLoadintoBookshelf;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.file_list);
 
@@ -54,15 +49,10 @@ public class Load_Activity extends ActionBarActivity implements
 
 	}
 
-	/**
-	 * DESCRIPTION OF METHOD TBI
-	 * 
-	 * @return RETURN VALUE DESCRIPTION TBI
-	 */
 	private List<String> getFileListfromSDCard() {
 		String state = Environment.getExternalStorageState();
 		List<String> flLst = new ArrayList<String>();
-		// if (Environment.MEDIA_MOUNTED.equals(state) && file.isDirectory()) {
+		//if (Environment.MEDIA_MOUNTED.equals(state) && file.isDirectory()) {
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			File[] fileArr = file.listFiles();
 			int length = fileArr.length;
@@ -75,13 +65,8 @@ public class Load_Activity extends ActionBarActivity implements
 		return flLst;
 	}
 
-	/**
-	 * DESCRIPTION OF CLASS TBI
-	 * 
-	 * @author Anjana Chatta
-	 * 
-	 */
-	public class FileAdapter extends ArrayAdapter<String> {
+	public class FileAdapter extends ArrayAdapter<String>
+	{
 
 		private List<String> fLst;
 		private Context adapContext;
@@ -116,12 +101,6 @@ public class Load_Activity extends ActionBarActivity implements
 		}
 	}
 
-	/**
-	 * DESCRIPTION OF CLASS TBI
-	 * 
-	 * @author Anjana Chatta
-	 * 
-	 */
 	static class FHolder {
 		public TextView fNameView;
 	}
@@ -138,10 +117,13 @@ public class Load_Activity extends ActionBarActivity implements
 		switch (v.getId()) {
 		case R.id.loadintobookshelf: // LOAD INTO BOOKSHELF
 			// Send intent to SingleViewActivity
-			// Intent intent = new Intent(getApplicationContext(),
-			// MainActivity.class);
-			// startActivityForResult(intent, 0);
+			//Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+			//startActivityForResult(intent, 0);
 			break;
 		}
 	}
 }
+
+
+
+

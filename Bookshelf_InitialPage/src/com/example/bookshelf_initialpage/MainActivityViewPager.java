@@ -1,5 +1,7 @@
 package com.example.bookshelf_initialpage;
 
+/*Author Anjana Chatta*/
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,12 +22,6 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ZoomControls;
 
-/**
- * CLASS DESCRIPTION TBI
- * 
- * @author Anjana Chatta
- * 
- */
 public class MainActivityViewPager extends FragmentActivity implements
 		View.OnClickListener {
 	private ViewPager viewPager;
@@ -35,7 +31,7 @@ public class MainActivityViewPager extends FragmentActivity implements
 	String targetPath;
 	public Button btnDay, btnNight, btnzoom_in, btnzoom_out;
 	TextPaint textPaint;
-	Custom_PagerAdapter cpa;
+	Custom_PagerAdpater cpa;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +93,7 @@ public class MainActivityViewPager extends FragmentActivity implements
 							e.printStackTrace();
 						}
 
-						cpa = new Custom_PagerAdapter(
+						cpa = new Custom_PagerAdpater(
 								getSupportFragmentManager(), splitFragments
 										.getPages());
 						viewPager.setAdapter(cpa);
@@ -124,20 +120,20 @@ public class MainActivityViewPager extends FragmentActivity implements
 	public void onClick(View v) {
 
 		int index;
-		Custom_PagerAdapter adapter;
+		Custom_PagerAdpater adapter;
 		android.support.v4.app.Fragment frags;
 
 		switch (v.getId()) {
 		case R.id.button1: // DAY
 			index = viewPager.getCurrentItem();
-			adapter = ((Custom_PagerAdapter) viewPager.getAdapter());
+			adapter = ((Custom_PagerAdpater) viewPager.getAdapter());
 			frags = adapter.getFragment(index);
 			((Fragments) frags).changeDAYColor();
 
 			break;
 		case R.id.button2: // NIGHT
 			index = viewPager.getCurrentItem();
-			adapter = ((Custom_PagerAdapter) viewPager.getAdapter());
+			adapter = ((Custom_PagerAdpater) viewPager.getAdapter());
 			frags = adapter.getFragment(index);
 			((Fragments) frags).changeNIGHTColor();
 
@@ -145,7 +141,7 @@ public class MainActivityViewPager extends FragmentActivity implements
 
 		case R.id.button3:
 			index = viewPager.getCurrentItem();
-			adapter = ((Custom_PagerAdapter) viewPager.getAdapter());
+			adapter = ((Custom_PagerAdpater) viewPager.getAdapter());
 			frags = adapter.getFragment(index);
 			((Fragments) frags).zoom_IN();
 
@@ -153,7 +149,7 @@ public class MainActivityViewPager extends FragmentActivity implements
 
 		case R.id.button4:
 			index = viewPager.getCurrentItem();
-			adapter = ((Custom_PagerAdapter) viewPager.getAdapter());
+			adapter = ((Custom_PagerAdpater) viewPager.getAdapter());
 			frags = adapter.getFragment(index);
 			((Fragments) frags).zoom_OUT();
 

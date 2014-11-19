@@ -1,5 +1,9 @@
 package com.example.bookshelf_initialpage;
 
+/**
+ * @author Anjana Chatta
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,11 +23,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * CLASS DESCRIPTION TBI
- * @author Anjana Chatta
- * 
- */
 public class SingleViewActivity extends Activity {
 
 	ArrayList<String> arrList = new ArrayList<String>();
@@ -39,10 +38,11 @@ public class SingleViewActivity extends Activity {
 	String[] mStringArray;
 
 	/**
-	 * This method reads a .txt file from SD card of the AVD and displays the
+	 * This method reads a .txt file from SD card of the AVD and dispalys the
 	 * contents onto the device text view. The user can scroll the pages across
 	 * from left to right and right to left.
 	 */
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_view);
@@ -97,12 +97,7 @@ public class SingleViewActivity extends Activity {
 
 	}
 
-	/**
-	 * CLASS DESCRIPTION TBI another class
-	 * 
-	 * @author Anjana Chatta
-	 * 
-	 */
+	// another class
 	class Pages_Adapter extends PagerAdapter {
 
 		// Implement PagerAdapter Class to handle individual page creation

@@ -10,62 +10,57 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 //public class ImageAdapter implements ListAdapter {
-/**
- * DESCRIPTION OF CLASS TO BE FILLED IN
- * 
- * @author Anjana Chatta
- * 
- */
 public class ImageAdapter extends BaseAdapter {
-	private Context mContext;
-	
-	public Integer[] mThumbIds = { R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher };
+	   private Context mContext;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param c
-	 */
-	public ImageAdapter(Context c) {
-		mContext = c;
+	   // Constructor
+	   public ImageAdapter(Context c) {
+	      mContext = c;
+	   }
+
+	   public int getCount() {
+	      return mThumbIds.length;
+	   }
+
+	   public Object getItem(int position) {
+	      return null;
+	   }
+
+	   public long getItemId(int position) {
+	      return 0;
+	   }
+
+	   // create a new ImageView for each item referenced by the Adapter
+	   public View getView(int position, View convertView, ViewGroup parent) {
+	      ImageView imageView;
+	      if (convertView == null) {
+	      imageView = new ImageView(mContext);
+	      imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+	      imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	      imageView.setPadding(8, 8, 8, 8);
+	      } else {
+	      imageView = (ImageView) convertView;
+	      }
+
+	      imageView.setImageResource(mThumbIds[position]);
+	      return imageView;
+	   }
+
+	   
+	   public Integer[] mThumbIds = {
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher, 
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher,
+			      R.drawable.ic_launcher};
 	}
-
-	public int getCount() {
-		return mThumbIds.length;
-	}
-
-	public Object getItem(int position) {
-		return null;
-	}
-
-	public long getItemId(int position) {
-		return 0;
-	}
-
-	/**
-	 * Create a new ImageView for each item referenced by the Adapter
-	 */
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ImageView imageView;
-		if (convertView == null) {
-			imageView = new ImageView(mContext);
-			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			imageView.setPadding(8, 8, 8, 8);
-		} else {
-			imageView = (ImageView) convertView;
-		}
-
-		imageView.setImageResource(mThumbIds[position]);
-		return imageView;
-	}
-
-	
-}
