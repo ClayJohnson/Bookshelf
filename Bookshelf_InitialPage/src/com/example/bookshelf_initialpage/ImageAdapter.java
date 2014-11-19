@@ -14,8 +14,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 
-<<<<<<< HEAD
-=======
+
 //public class ImageAdapter implements ListAdapter {
 /**
  * DESCRIPTION OF CLASS TO BE FILLED IN
@@ -23,7 +22,6 @@ import android.widget.ListAdapter;
  * @author Anjana Chatta
  * 
  */
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
 public class ImageAdapter extends BaseAdapter {
 	private Context mContext;
 	

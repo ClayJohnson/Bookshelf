@@ -1,18 +1,7 @@
-<<<<<<< HEAD
- package com.example.bookshelf_initialpage;
- 
-/**
- * 
- * 
- * 
- * 
- *@author Anjana Chatta 
- */
- 
-=======
+
 package com.example.bookshelf_initialpage;
 
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +27,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-=======
+
 /**
  * DESCRIPTION OF CLASS TBI
  * 
  * @author Anjana Chatta
  * 
  */
-public class Load_Activity extends ActionBarActivity implements
-		OnItemLongClickListener, View.OnClickListener {
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
-
 public class Load_Activity extends ActionBarActivity implements View.OnClickListener {
 //implements OnItemClickListener, View.OnClickListener {
 
@@ -103,9 +87,6 @@ public class Load_Activity extends ActionBarActivity implements View.OnClickList
                       .show();
                 
                
-                
-
-<<<<<<< HEAD
                // basket=new Bundle();
                // basket.putInt("pos",position);
             
@@ -114,22 +95,16 @@ public class Load_Activity extends ActionBarActivity implements View.OnClickList
      }//new
 		
 		
-=======
+
 	/**
 	 * DESCRIPTION OF METHOD TBI
 	 * 
 	 * @return RETURN VALUE DESCRIPTION TBI
 	 */
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
 	private List<String> getFileListfromSDCard() {
 		String state = Environment.getExternalStorageState();
-<<<<<<< HEAD
 		List<String> fileList = new ArrayList<String>();
 		//if (Environment.MEDIA_MOUNTED.equals(state) && file.isDirectory()) {
-=======
-		List<String> flLst = new ArrayList<String>();
-		// if (Environment.MEDIA_MOUNTED.equals(state) && file.isDirectory()) {
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			File[] fileArr = file.listFiles();
 			int length = fileArr.length;
@@ -196,7 +171,6 @@ public class Load_Activity extends ActionBarActivity implements View.OnClickList
 
 	public void onClick(View v) {
 		int index;
-<<<<<<< HEAD
 		Intent intent;
 		
 		
@@ -212,27 +186,10 @@ public class Load_Activity extends ActionBarActivity implements View.OnClickList
 				
 				
 			case R.id.deletebookfromshelf:
-				
-			
-		
-=======
-		switch (v.getId()) {
-		case R.id.loadintobookshelf: // LOAD INTO BOOKSHELF
-			// Send intent to SingleViewActivity
-			// Intent intent = new Intent(getApplicationContext(),
-			// MainActivity.class);
-			// startActivityForResult(intent, 0);
-			break;
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
+					
+
 		}
 	}
-<<<<<<< HEAD
     
 }//end
 
-
-
-
-=======
-}
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
