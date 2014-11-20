@@ -26,6 +26,7 @@ public class ImageAdapter extends BaseAdapter {
 	private Context mContext;
 	
 	public Integer[] mThumbIds = { R.drawable.ic_launcher,
+			R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,

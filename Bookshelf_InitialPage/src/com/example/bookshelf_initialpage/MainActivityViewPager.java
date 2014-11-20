@@ -1,14 +1,11 @@
 package com.example.bookshelf_initialpage;
 
-<<<<<<< HEAD
 /**@author Anjana
  * This class opens a text file from the SD card and displays the contents on a Fragment of the viewPager
  * Read pages enables to swipe pages both ways. Zom in Zoom out of pages are enabled
  * 
  */
 
-=======
->>>>>>> branch 'master' of https://github.com/ClayJohnson/Bookshelf.git
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

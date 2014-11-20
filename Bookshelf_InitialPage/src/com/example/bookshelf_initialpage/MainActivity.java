@@ -16,7 +16,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 /**
- * CLASS DESCRPTION TBI
  * 
  * @author Anjana This is the MainActivity the starting page of the Android app.
  *         Displays a Bookshelf with all books When the user clicks on one item
@@ -32,21 +31,25 @@ public class MainActivity extends ActionBarActivity implements
 	public Button btnLoad;
 	public Button btnCategory;
 	public Button btnSearch;
-	public Integer intItem;;
+	public Integer intItem;
+	public ImageAdapter image_adap;
+	public GridView gridview;
 
 	// Displays the item number
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		image_adap = new ImageAdapter(this);
 
-		GridView gridview = (GridView) findViewById(R.id.gridView);
-		gridview.setAdapter(new ImageAdapter(this));
+		gridview = (GridView) findViewById(R.id.gridView);
+		//gridview.setAdapter(new ImageAdapter(this));
+		gridview.setAdapter(image_adap);
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				Toast.makeText(MainActivity.this, "" + position,
-						Toast.LENGTH_SHORT).show();
+				/*Toast.makeText(MainActivity.this, "" + position,
+						Toast.LENGTH_SHORT).show();*/
 				Intent intent = new Intent(getApplicationContext(),
 						MainActivityViewPager.class);
 				startActivityForResult(intent, 0);
@@ -68,6 +71,7 @@ public class MainActivity extends ActionBarActivity implements
 			// String value = extras.getString("ListItemValue");
 			Toast.makeText(getApplicationContext(), "ListItem : " + value,
 					Toast.LENGTH_LONG).show();
+			getItemValue();
 		}
 
 		/*
@@ -84,20 +88,20 @@ public class MainActivity extends ActionBarActivity implements
 		
 		switch (v.getId()) {
 		case R.id.loadbutton: // LOAD
-			// Send intent to SingleViewActivity
+			// Send intent to Load_Activity
 			intent = new Intent(getApplicationContext(), Load_Activity.class);
 			startActivity(intent);
 			break;
 
 		case R.id.categorybutton:
-			// Send intent to SingleViewActivity
+			// Send intent to Category_Activity
 			intent = new Intent(getApplicationContext(),
 					Category_Activity.class);
 			startActivity(intent);
 			break;
 
 		case R.id.searchbutton:
-			// Send intent to SingleViewActivity
+			// Send intent to Search_Activity
 			intent = new Intent(getApplicationContext(), Search_Activity.class);
 			startActivity(intent);
 			break;
@@ -112,9 +116,21 @@ public class MainActivity extends ActionBarActivity implements
 			String value = extras.getString("ListItemValue");
 			Toast.makeText(getApplicationContext(), "ListItem : " + value,
 					Toast.LENGTH_LONG).show();
+			addItemsToGridView();
 		}
 		return null;
 
+	}
+
+
+	private void addItemsToGridView() {
+		// TODO Auto-generated method stub
+		       
+		       image_adap.mThumbIds[2] = R.drawable.sanantonio;
+	           image_adap.notifyDataSetChanged();
+	           gridview.invalidateViews();
+	           gridview.setAdapter(image_adap);
+		
 	}
 
 }

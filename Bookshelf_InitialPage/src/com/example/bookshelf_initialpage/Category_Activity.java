@@ -42,8 +42,22 @@ public class Category_Activity extends ActionBarActivity implements
 
 		listView = (ListView) findViewById(R.id.listView1);
 		file = Environment.getExternalStorageDirectory();
-		fileNameList = getFileListfromSDCard();
-
+	    //fileNameList = getFileListfromSDCard();
+		fileNameList = new ArrayList<String>();
+		
+		fileNameList.add("Agriculture");
+	    fileNameList.add("Art");
+	    fileNameList.add("Business");
+	    fileNameList.add("Children's Fiction");
+	    fileNameList.add("Family & Parenting");
+	    fileNameList.add("Fiction");
+	    fileNameList.add("Fun & Games");
+	    fileNameList.add("History");
+	    fileNameList.add("Medical");
+	    fileNameList.add("Transportation");
+	    fileNameList.add("Travel");
+	    
+ 
 		// Define a new Adapter
 		// First parameter - Context
 		// Second parameter - Layout for the row
@@ -86,6 +100,7 @@ public class Category_Activity extends ActionBarActivity implements
 	}// new
 
 	private List<String> getFileListfromSDCard() {
+		//String state = Environment.getExternalStorageState();
 		String state = Environment.getExternalStorageState();
 		List<String> fileList = new ArrayList<String>();
 		// if (Environment.MEDIA_MOUNTED.equals(state) && file.isDirectory()) {
