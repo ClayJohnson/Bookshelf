@@ -2,7 +2,9 @@ package com.example.bookshelf_initialpage;
 
 /**
  *@author Anjana Chatta 
- *Category displays all book categories. Allows to delete book and insert book into a category
+ * Category displays all book categories. Two buttons 
+ * one to Add the categories and to delete a category enables to 
+ * add and delete a category from the database respectively
  */
 
 import java.io.File;
@@ -25,7 +27,7 @@ import android.widget.Toast;
 
 public class Category_Activity extends ActionBarActivity implements
 		View.OnClickListener {
-	
+
 	private ListView listView;
 	private List<String> fileNameList;
 	private FileAdapter mAdapter;
@@ -42,22 +44,21 @@ public class Category_Activity extends ActionBarActivity implements
 
 		listView = (ListView) findViewById(R.id.listView1);
 		file = Environment.getExternalStorageDirectory();
-	    //fileNameList = getFileListfromSDCard();
+		// fileNameList = getFileListfromSDCard();
 		fileNameList = new ArrayList<String>();
-		
+
 		fileNameList.add("Agriculture");
-	    fileNameList.add("Art");
-	    fileNameList.add("Business");
-	    fileNameList.add("Children's Fiction");
-	    fileNameList.add("Family & Parenting");
-	    fileNameList.add("Fiction");
-	    fileNameList.add("Fun & Games");
-	    fileNameList.add("History");
-	    fileNameList.add("Medical");
-	    fileNameList.add("Transportation");
-	    fileNameList.add("Travel");
-	    
- 
+		fileNameList.add("Art");
+		fileNameList.add("Business");
+		fileNameList.add("Children's Fiction");
+		fileNameList.add("Family & Parenting");
+		fileNameList.add("Fiction");
+		fileNameList.add("Fun & Games");
+		fileNameList.add("History");
+		fileNameList.add("Medical");
+		fileNameList.add("Transportation");
+		fileNameList.add("Travel");
+
 		// Define a new Adapter
 		// First parameter - Context
 		// Second parameter - Layout for the row
@@ -79,7 +80,6 @@ public class Category_Activity extends ActionBarActivity implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// ListView Clicked item index
-
 				itemPosition = position;
 				// ListView Clicked item value
 				itemValue = (String) listView.getItemAtPosition(position);
@@ -91,16 +91,12 @@ public class Category_Activity extends ActionBarActivity implements
 				 */
 				Toast.makeText(getApplicationContext(),
 						"ListItem : " + itemValue, Toast.LENGTH_LONG).show();
-
-				// basket=new Bundle();
-				// basket.putInt("pos",position);
-
-			}
+				}
 		});
 	}// new
 
-	private List<String> getFileListfromSDCard() {
-		//String state = Environment.getExternalStorageState();
+	/*private List<String> getFileListfromSDCard() {
+		// String state = Environment.getExternalStorageState();
 		String state = Environment.getExternalStorageState();
 		List<String> fileList = new ArrayList<String>();
 		// if (Environment.MEDIA_MOUNTED.equals(state) && file.isDirectory()) {
@@ -114,7 +110,7 @@ public class Category_Activity extends ActionBarActivity implements
 		}
 
 		return fileList;
-	}
+	}*/
 
 	public class FileAdapter extends ArrayAdapter<String> {
 

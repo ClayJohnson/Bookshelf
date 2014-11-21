@@ -35,7 +35,7 @@
         
         <activity
             android:name=".Load_Activity"
-            android:label="Load / Delete Book" >
+            android:label="Load / Remove Book" >
            <intent-filter android:label="Load/Delete Book">
 		      <action android:name="android.intent.action.MAIN" />
 		      <category android:name="android.intent.category.LAUNCHER" />

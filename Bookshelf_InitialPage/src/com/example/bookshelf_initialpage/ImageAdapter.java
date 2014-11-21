@@ -1,43 +1,38 @@
 package com.example.bookshelf_initialpage;
 
-/**
- * @author Anjana
- * Populates the Gridview with Book cover icons
- * 
- */
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 
-
-//public class ImageAdapter implements ListAdapter {
 /**
- * DESCRIPTION OF CLASS TO BE FILLED IN
+ * Adapters in Android are a bridge between the Adapter View (e.g. ListView) and
+ * the underlying data for that view. Adapters call the getView() method which
+ * returns a view for each item within the adapter view. Below the adapter
+ * enables to populate the Gridview with Book cover icons
  * 
  * @author Anjana Chatta
  * 
  */
 public class ImageAdapter extends BaseAdapter {
 	private Context mContext;
-	
+
+	//An array of all icons to be displayed onto GridView
 	public Integer[] mThumbIds = { R.drawable.ic_launcher,
-			R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher };
+			R.drawable.ic_launcher, R.drawable.ic_launcher,
+			R.drawable.ic_launcher };
+	
 
 	/**
-	 * Constructor
-	 * 
+	 * Context is the current state of the application/object. 
 	 * @param c
 	 */
 	public ImageAdapter(Context c) {
@@ -74,5 +69,4 @@ public class ImageAdapter extends BaseAdapter {
 		return imageView;
 	}
 
-	
 }

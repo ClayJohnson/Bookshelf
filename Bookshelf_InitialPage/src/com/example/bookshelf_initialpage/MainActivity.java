@@ -34,6 +34,7 @@ public class MainActivity extends ActionBarActivity implements
 	public Integer intItem;
 	public ImageAdapter image_adap;
 	public GridView gridview;
+	String bundlevalue;
 
 	// Displays the item number
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,9 +68,9 @@ public class MainActivity extends ActionBarActivity implements
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			String value = getIntent().getStringExtra("ListItemValue");
+			bundlevalue = getIntent().getStringExtra("ListItemValue");
 			// String value = extras.getString("ListItemValue");
-			Toast.makeText(getApplicationContext(), "ListItem : " + value,
+			Toast.makeText(getApplicationContext(), "ListItem : " + bundlevalue,
 					Toast.LENGTH_LONG).show();
 			getItemValue();
 		}
@@ -116,6 +117,7 @@ public class MainActivity extends ActionBarActivity implements
 			String value = extras.getString("ListItemValue");
 			Toast.makeText(getApplicationContext(), "ListItem : " + value,
 					Toast.LENGTH_LONG).show();
+			
 			addItemsToGridView();
 		}
 		return null;
@@ -126,11 +128,12 @@ public class MainActivity extends ActionBarActivity implements
 	private void addItemsToGridView() {
 		// TODO Auto-generated method stub
 		       
-		       image_adap.mThumbIds[2] = R.drawable.sanantonio;
+		       image_adap.mThumbIds[0] = R.drawable.sanantonio;
 	           image_adap.notifyDataSetChanged();
 	           gridview.invalidateViews();
 	           gridview.setAdapter(image_adap);
-		
+		    
+		       
 	}
 
 }
